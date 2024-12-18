@@ -6,6 +6,11 @@ const userSchema = new mongoose.Schema({
         required : true,
         unique : true,
     },
+    description: {
+        type : String,
+        required : true,
+        unique : true,
+    },
     email: {
         type : String,
         required : true,
@@ -18,5 +23,5 @@ const userSchema = new mongoose.Schema({
     }
 }, {timestamps : true});
 
-const User = mongoose.model("User", userSchema);
-export default User;
+const Temple = mongoose.model("Temple", userSchema);
+export default Temple;

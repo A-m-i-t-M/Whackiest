@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import Temple from "../models/user.model.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { errorHandler } from "../utils/error.js";
@@ -6,12 +6,13 @@ import { errorHandler } from "../utils/error.js";
 
 
 export const signUP = async(req, res, next)=>{
-    const {username, email, password} = req.body;
+    const {username, description, email, password} = req.body;
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const newUser = new User({username, email, password : hashedPassword});
+    const newTemple = new Temple({username, description, email, password : hashedPassword});
 
     try{
-        await newUser.save();
+        await newTemple.save();
+        res.setHeader('Content-Type', 'application/json');
         res.status(201).json("New User Created Successfully!");
     }catch(error){
         next(errorHandler(401, 'User Already Exists!'));
@@ -21,18 +22,18 @@ export const signUP = async(req, res, next)=>{
 export const signIN = async (req, res, next)=>{
     const {email, password} = req.body;
     try {
-        const validUser = await User.findOne({email});
-        if(!validUser){
+        const validTemple = await Temple.findOne({email});
+        if(!validTemple){
             return next(errorHandler(404, 'Invalid Username / Password'));
         }
 
-        const validPassword = bcrypt.compareSync(password, validUser.password);
+        const validPassword = bcrypt.compareSync(password, validTemple.password);
         if(!validPassword){
             return next(errorHandler(401, 'Invalid Username / Password'));
         }
 
-        const token = jwt.sign({_id : validUser._id}, process.env.JWT_SECRET);
-        const {password : pass, ...remaining} = validUser._doc;
+        const token = jwt.sign({_id : validTemple._id}, process.env.JWT_SECRET);
+        const {password : pass, ...remaining} = validTemple._doc;
         
         res.cookie('access_token', token, 
                     {
@@ -46,4 +47,13 @@ export const signIN = async (req, res, next)=>{
     } catch (error) {
         next(error);
     }
-}
+};
+
+export const signOut = async(req,res,next)=>{
+    try{
+        res.clearCookie("access_token");
+        res.status(200).json("User has been logged out");
+    }catch(error){
+        next(error);
+    }
+};
