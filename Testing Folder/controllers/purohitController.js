@@ -1,6 +1,7 @@
-const Purohit = require('../models/Purohit');
+// const Purohit = require('../models/Purohit');
+import Purohit from '../models/Purohit';
 
-const createPurohit=async(req,res)=>{
+export const createPurohit=async(req,res)=>{
     try{
         const {name,price}=req.body;
         if(!name||!price){
@@ -19,7 +20,7 @@ const createPurohit=async(req,res)=>{
     }
 }
 
-const getPurohits = async (req, res) => {
+export const getPurohits = async (req, res) => {
     try {
       const { userId } = req.body; 
       if (!userId) {
@@ -36,7 +37,7 @@ const getPurohits = async (req, res) => {
     }
 };
 
-const deletePurohit = async (req, res) => {
+export const deletePurohit = async (req, res) => {
     try {
         const { purohitId } = req.body;
 
@@ -73,4 +74,4 @@ const deletePurohit = async (req, res) => {
     }
 };
 
-module.exports = {createPurohit,getPurohits,deletePurohit}
+// module.exports = {createPurohit,getPurohits,deletePurohit}

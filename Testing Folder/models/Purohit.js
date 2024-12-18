@@ -1,4 +1,6 @@
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+import exp from "constants";
+import mongoose from "mongoose";
 
 const purohitSchema = new mongoose.Schema({
   user: {
@@ -15,3 +17,7 @@ const purohitSchema = new mongoose.Schema({
     required:true,
   }
 });
+
+const Purohit = mongoose.model("Purohit", purohitSchema);
+export default Purohit;
+// module.exports = mongoose.model('Snippet', snippetSchema);

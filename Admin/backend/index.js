@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.route.js';
-
+import purohitRouter from './routes/purohit.route.js'
 
 
 dotenv.config();
@@ -21,7 +21,7 @@ app.listen(3000, ()=>{
 });
 
 app.use('/backend/auth', authRouter);
-
+app.use('/backend/purohit', purohitRouter);
 
 app.use((error, req, res, next)=>{
     const statusCode = error.statusCode || 500;
