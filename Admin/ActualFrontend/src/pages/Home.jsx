@@ -48,7 +48,13 @@ export default function Home() {
           </div>
         </form>
       </div>
-      <Link></Link>
+      <div className='flex flex-row-reverse'>
+        <div className=' justify-self-end'>
+          <Link to={'/review'}>
+            <span>View Details</span>
+          </Link>
+        </div>
+      </div>
     </div>
     );
 }
