@@ -28,6 +28,7 @@ export default function Details() {
                 setError(err.message);
             }
         };
+
         const fetchItems = async () => {
             try {
                 const response = await fetch('/backend/itemm/admin', {
@@ -39,7 +40,7 @@ export default function Details() {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch purohits');
+                    throw new Error(errorData.message || 'Failed to fetch items');
                 }
 
                 const data = await response.json();
@@ -48,6 +49,7 @@ export default function Details() {
                 setError(err.message);
             }
         };
+
         const fetchServices = async () => {
             try {
                 const response = await fetch('/backend/service/admin', {
@@ -59,7 +61,7 @@ export default function Details() {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch purohits');
+                    throw new Error(errorData.message || 'Failed to fetch services');
                 }
 
                 const data = await response.json();
@@ -109,16 +111,15 @@ export default function Details() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete purohit');
+                throw new Error(errorData.message || 'Failed to delete item');
             }
 
-            // Update the list of purohits after deletion
+            // Update the list of items after deletion
             setItems((prevItems) => prevItems.filter((p) => p._id !== itemId));
         } catch (err) {
             setError(err.message);
         }
     };
-
 
     const handleDeleteService = async (serviceId) => {
         try {
@@ -132,95 +133,113 @@ export default function Details() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete purohit');
+                throw new Error(errorData.message || 'Failed to delete service');
             }
 
-            // Update the list of purohits after deletion
+            // Update the list of services after deletion
             setServices((prevServices) => prevServices.filter((p) => p._id !== serviceId));
         } catch (err) {
             setError(err.message);
         }
     };
 
-
     return (
-        <div>
-            <h1>Purohit Details</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <ul>
-                {purohits.map((purohit) => (
-                    <li key={purohit._id} style={{ display: 'flex', alignItems: 'center' }}>
-                        <div>
-                            <h3>{purohit.name}</h3>
-                            <p>Price: {purohit.price}</p>
-                        </div>
-                        <button
-                            style={{
-                                marginLeft: '10px',
-                                padding: '5px 10px',
-                                backgroundColor: 'red',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '5px',
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => handleDeletePurohit(purohit._id)}
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            <h1>Item Details</h1>
-            <ul>
-                {items.map((item) => (
-                    <li key={item._id} style={{ display: 'flex', alignItems: 'center' }}>
-                        <div>
-                            <h3>{item.name}</h3>
-                            <p>Price: {item.price}</p>
-                        </div>
-                        <button
-                            style={{
-                                marginLeft: '10px',
-                                padding: '5px 10px',
-                                backgroundColor: 'red',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '5px',
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => handleDeleteItem(item._id)}
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
-            <h1>Service Details</h1>
-            <ul>
-                {services.map((service) => (
-                    <li key={service._id} style={{ display: 'flex', alignItems: 'center' }}>
-                        <div>
-                            <h3>{service.name}</h3>
-                            <p>Price: {service.price}</p>
-                        </div>
-                        <button
-                            style={{
-                                marginLeft: '10px',
-                                padding: '5px 10px',
-                                backgroundColor: 'red',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '5px',
-                                cursor: 'pointer',
-                            }}
-                            onClick={() => handleDeleteService(service._id)}
-                        >
-                            Delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
+        <div className="container mx-auto p-4 bg-peach-50">
+            <h1 className="text-3xl font-bold mb-8 text-center text-darkblue">Details Dashboard</h1>
+            {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+
+            <div className="mb-12">
+                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                        <thead className="bg-gray-800 text-white">
+                            <tr>
+                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {purohits.map((purohit) => (
+                                <tr key={purohit._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                    <td className="px-4 py-2 border border-neutral-300">{purohit.name}</td>
+                                    <td className="px-4 py-2 border border-neutral-300">{purohit.price}</td>
+                                    <td className="px-4 py-2 border border-neutral-300 text-center">
+                                        <button
+                                            className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
+                                            onClick={() => handleDeletePurohit(purohit._id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div className="mb-12">
+                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                        <thead className="bg-gray-800 text-white">
+                            <tr>
+                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((item) => (
+                                <tr key={item._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                    <td className="px-4 py-2 border border-neutral-300">{item.name}</td>
+                                    <td className="px-4 py-2 border border-neutral-300">{item.price}</td>
+                                    <td className="px-4 py-2 border border-neutral-300 text-center">
+                                        <button
+                                            className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
+                                            onClick={() => handleDeleteItem(item._id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
+                <div className="overflow-x-auto">
+                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                        <thead className="bg-gray-800 text-white">
+                            <tr>
+                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {services.map((service) => (
+                                <tr key={service._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                    <td className="px-4 py-2 border border-neutral-300">{service.name}</td>
+                                    <td className="px-4 py-2 border border-neutral-300">{service.price}</td>
+                                    <td className="px-4 py-2 border border-neutral-300 text-center">
+                                        <button
+                                            className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
+                                            onClick={() => handleDeleteService(service._id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     );
 }
