@@ -110,7 +110,7 @@ export default function Home() {
       }
 
       console.log("Signed out");
-      navigate("/sign-in");
+      navigate("/");
     }catch(error){
       console.log("Couldnt sign out");
     }
@@ -159,7 +159,6 @@ export default function Home() {
           <button className=' uppercase text-red-700 border rounded-xl' onClick={handleSignOut}>Sign Out</button>
         </div>
       </div>
-    </div>
-    );
+    </div>
+    );
 }
-

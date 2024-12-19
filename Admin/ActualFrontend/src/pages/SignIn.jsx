@@ -39,7 +39,7 @@ export default function SignIn() {
           setError(null);
           // localStorage.setItem('currentUser', JSON.stringify(formData));
         //   dispatch(signInSuccess(data));
-          navigate("/");
+          navigate("/home");
           // console.log(data);
         } catch (error) {
           setLoading(false);
