@@ -1,10 +1,11 @@
 import express from "express";
-import { createPurohit, deletePurohit, getPurohits } from "../controllers/purohit.controller.js";
-
+import { createPurohit, deletePurohit, getPurohits,getPurohitsforAdmin } from "../controllers/purohit.controller.js";
+import { authMiddleware } from "../middleware/middleware.js";
 const router = express.Router();
 
-router.post('/create', createPurohit); // Protected route to create notebook
-router.get('/', getPurohits); // Protected route to fetch all notebooks
-router.post('/delete', deletePurohit);
+router.post('/create',authMiddleware, createPurohit);
+router.get('/',authMiddleware, getPurohits); 
+router.post('/delete',authMiddleware, deletePurohit);
+router.get('/admin',authMiddleware,getPurohitsforAdmin)
 
 export default router;

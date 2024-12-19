@@ -3,14 +3,14 @@ import mongoose from "mongoose";
 const itemSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Temple",
         required: true,
       },
       name:{
         type:String,
         required:true
       },
-      item:{
+      price:{
         type:Number,
         required:true,
       }

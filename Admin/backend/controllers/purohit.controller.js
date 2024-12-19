@@ -19,6 +19,15 @@ export const createPurohit=async(req,res)=>{
     }
 }
 
+export const getPurohitsforAdmin=async(req,res)=>{
+    try {
+        const purohits = await Purohit.find({ user: req.user._id });// Find notebooks linked to the logged-in user
+        res.status(200).json({ purohits });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching purohits', error: error.message });
+    }
+}
+
 export const getPurohits = async (req, res) => {
     try {
       const { userId } = req.body; 

@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import authRouter from './routes/auth.route.js';
 import purohitRouter from './routes/purohit.route.js'
-
+import itemRouter from './routes/item.route.js'
+import serviceRouter from './routes/service.route.js'
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.listen(3000, ()=>{
 
 app.use('/backend/auth', authRouter);
 app.use('/backend/purohit', purohitRouter);
+app.use('/backend/itemm',itemRouter);
+app.use('/backend/service',serviceRouter);
 
 app.use((error, req, res, next)=>{
     const statusCode = error.statusCode || 500;

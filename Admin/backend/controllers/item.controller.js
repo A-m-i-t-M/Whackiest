@@ -19,6 +19,15 @@ export const createItem=async(req,res)=>{
     }
 }
 
+export const getItemsForAdmin=async(req,res)=>{
+    try {
+        const items = await Item.find({ user: req.user._id });// Find notebooks linked to the logged-in user
+        res.status(200).json({ items });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching items', error: error.message });
+    }
+}
+
 export const getItems = async (req, res) => {
     try {
       const { userId } = req.body; 

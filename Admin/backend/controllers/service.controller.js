@@ -13,10 +13,19 @@ export const createService=async(req,res)=>{
             price, 
         });
         await service.save();
-        res.status(201).json({ message: 'Service created successfully', item});
+        res.status(201).json({ message: 'Service created successfully', service});
     }
     catch (error) {
         res.status(500).json({ message: 'Error creating service', error: error.message });
+    }
+}
+
+export const getAdminServices=async(req,res)=>{
+    try {
+        const services = await Service.find({ user: req.user._id });// Find notebooks linked to the logged-in user
+        res.status(200).json({ services });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching services', error: error.message });
     }
 }
 
@@ -58,7 +67,7 @@ export const deleteService = async (req, res) => {
         }
 
         // Delete the snippet
-        await Service.findByIdAndDelete(itemId);
+        await Service.findByIdAndDelete(serviceId);
 
         res.status(200).json({
             success: true,

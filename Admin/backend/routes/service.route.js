@@ -1,10 +1,10 @@
 import express from "express";
-import {createService, deleteService, getServices} from '../controllers/service.controller.js';
-
+import {createService, deleteService, getServices,getAdminServices} from '../controllers/service.controller.js';
+import { authMiddleware } from "../middleware/middleware.js";
 const router = express.Router();
 
-router.post('/create', protect, createService); // Protected route to create notebook
-router.get('/', getServices); // Protected route to fetch all notebooks
-router.post('/delete', protect, deleteService);
-
+router.post('/create', authMiddleware, createService); // Protected route to create notebook
+router.get('/',authMiddleware, getServices); // Protected route to fetch all notebooks
+router.post('/delete', authMiddleware, deleteService);
+router.get('/admin',authMiddleware,getAdminServices)
 export default router;
