@@ -159,6 +159,6 @@ export default function Home() {
           <button className=' uppercase text-red-700 border rounded-xl' onClick={handleSignOut}>Sign Out</button>
         </div>
       </div>
-    </div>
-    );
+   </div>
+);
 }
