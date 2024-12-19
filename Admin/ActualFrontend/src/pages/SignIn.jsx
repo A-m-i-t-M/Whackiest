@@ -37,6 +37,7 @@ export default function SignIn() {
     
           setLoading(false);
           setError(null);
+          // localStorage.setItem('currentUser', JSON.stringify(formData));
         //   dispatch(signInSuccess(data));
           navigate("/");
           // console.log(data);
