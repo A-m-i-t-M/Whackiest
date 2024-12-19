@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -7,7 +7,7 @@ export default function Home() {
   const [purohit, setPurohit] = useState({ name : '', price : ''});
   const [item, setItem] = useState({ name : '', price : ''});
   const [service, setService] = useState({ name : '', price : ''});
-
+  const navigate = useNavigate();
   const handleChangePurohit = (e)=>{
     setPurohit({
       ...purohit, 
@@ -99,6 +99,22 @@ export default function Home() {
       console.log("Error hua bc");
     }
   }
+
+  const handleSignOut = async()=>{
+    try{
+      const res = await fetch("/backend/auth/signout");
+      const data = await res.json();
+
+      if(data.success === false){
+        console.log(data.error);
+      }
+
+      console.log("Signed out");
+      navigate("/");
+    }catch(error){
+      console.log("Couldnt sign out");
+    }
+  }
   // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   return (
     <div className=' mx-auto p-4 max-w-lg'>
@@ -133,13 +149,16 @@ export default function Home() {
           </div>
         </form>
       </div>
-      <div className='flex flex-row-reverse'>
-        <div className=' justify-self-end'>
+      <div className='flex justify-between'>
+        <div className=' justify-evenly'>
           <Link to={'/review'}>
             <span>View Details</span>
           </Link>
         </div>
+        <div>
+          <button className=' uppercase text-red-700 border rounded-xl' onClick={handleSignOut}>Sign Out</button>
+        </div>
       </div>
-   </div>
-);
+    </div>
+    );
 }

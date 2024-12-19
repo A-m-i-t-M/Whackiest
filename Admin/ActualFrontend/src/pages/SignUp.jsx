@@ -39,7 +39,7 @@ export default function SignUp() {
 
       setLoading(false);
       setError(null);
-      navigate("/sign-in");
+      navigate("/");
       console.log(data);
     } catch (error) {
       setLoading(false);
@@ -89,7 +89,7 @@ export default function SignUp() {
     </form>
     <div className=' flex gap-3 justify-center py-3'>
       <p>Have an Account?</p>
-      <Link to={"/sign-in"}>
+      <Link to={"/"}>
         <span className=' text-blue-700'>Sign in</span>
       </Link>
     </div>
