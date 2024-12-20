@@ -5,7 +5,8 @@ import {createItem, deleteItem, getItems,getItemsForAdmin} from '../controllers/
 const router = express.Router();
 
 router.post('/create', authMiddleware, createItem); // Protected route to create notebook
-router.get('/',getItems); // Protected route to fetch all notebooks
+// router.get('/',getItems); // Protected route to fetch all notebooks
+router.post('/', getItems);
 router.post('/delete', authMiddleware, deleteItem);
 router.get('/admin',authMiddleware,getItemsForAdmin);
 
