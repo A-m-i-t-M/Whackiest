@@ -171,14 +171,12 @@ export default function DarshanBooking() {
             >
               <option value="">Select an Item</option>
               {items.map((item) => (
-                <option key={item._id} value={item._id}>{item.name}</option>
+                <option key={item._id} value={item.name}>{item.name}</option>
               ))}
             </select>
+              
           </div>
-        </div>
-
-
-        
+        </div>        
 
         
 

@@ -108,6 +108,14 @@ export default function Home() {
     }
   };
 
+  const handleViewBookings = async()=>{
+    try{
+      navigate("/view-admin-bookings");
+    }catch(error){
+      console.log("Cant see the bookings macha");
+    }
+  }
+
   return (
     <div
       style={{
@@ -201,21 +209,28 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div className="flex justify-between">
-          <div className="justify-evenly">
+        <div className="flex justify-between align-middle">
+          <div className="justify-evenly w-1/3">
             <Link to={'/review'}>
               <span className="text-blue-700 underline">View Details</span>
             </Link>
           </div>
-          <div>
+          <div className="justify-evenly w-1/3"> 
             <button
               className="uppercase text-red-700 border rounded-xl px-4 py-2"
-              onClick={handleSignOut}
-            >
+              onClick={handleViewBookings}>
+              Bookings
+            </button>
+          </div>
+          <div className="justify-evenly w-1/3">
+            <button
+              className="uppercase text-red-700 border rounded-xl px-4 py-2"
+              onClick={handleSignOut}>
               Sign Out
             </button>
           </div>
         </div>
+        
       </div>
     </div>
   );

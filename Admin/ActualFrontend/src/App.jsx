@@ -12,6 +12,7 @@ import Darshan from './pages/Darshan'
 import Events from './pages/Events'
 import DarshanBooking from './pages/DarshanBooking'
 import ViewAllBookings from './pages/ViewAllBookings'
+import ViewAdminStuff from './pages/ViewAdminStuff'
 export default function App() {
   return <>
     <BrowserRouter>
@@ -28,6 +29,7 @@ export default function App() {
         <Route path='/events' element={<Events/>}/>
         <Route path='/mandirbook' element={<DarshanBooking/>}/>
         <Route path='/view-bookings' element={<ViewAllBookings/>}/>
+        <Route path='/view-admin-bookings' element={<ViewAdminStuff/>}/>
       </Routes>
     </BrowserRouter>
   </>
