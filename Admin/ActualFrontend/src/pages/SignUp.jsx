@@ -68,13 +68,14 @@ export default function SignUp() {
             onChange={handleChange}
           />
 
-          <input
+          {/* <input
             placeholder="Description"
             id="description"
             type="text"
             className="border p-3 rounded-xl"
             onChange={handleChange}
-          />
+          /> */}
+          <textarea placeholder='Description' id='description' className='border p-3 rounded-xl' onChange={handleChange} rows={5}></textarea>
 
           <input
             placeholder="E-Mail"
