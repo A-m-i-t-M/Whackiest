@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Link} from 'react-router-dom';
+import images from '../assets/bg8.jpg';
 
 export default function Details() {
     const [purohits, setPurohits] = useState([]);
@@ -145,106 +145,109 @@ export default function Details() {
     };
 
     return (
-        <div className="container mx-auto p-4 bg-peach-50">
-            <h1 className="text-3xl font-bold mb-8 text-center text-darkblue">Details Dashboard</h1>
-            {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-
-            <div className="mb-12">
-                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
-                <div className="overflow-x-auto">
-                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                        <thead className="bg-gray-800 text-white">
-                            <tr>
-                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {purohits.map((purohit) => (
-                                <tr key={purohit._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                    <td className="px-4 py-2 border border-neutral-300">{purohit.name}</td>
-                                    <td className="px-4 py-2 border border-neutral-300">{purohit.price}</td>
-                                    <td className="px-4 py-2 border border-neutral-300 text-center">
-                                        <button
-                                            className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                            onClick={() => handleDeletePurohit(purohit._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+        <div
+              style={{
+                backgroundImage: `url(${images})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+            <div className="container mx-auto p-4 bg-opacity-90 rounded-lg shadow-md">
+                <h1 className="text-3xl font-bold mb-8 text-center text-darkblue">Details Dashboard</h1>
+                {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+    
+                <div className="mb-12">
+                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
+                    <div className="overflow-x-auto">
+                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                            <thead className="bg-gray-800 text-white">
+                                <tr>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {purohits.map((purohit) => (
+                                    <tr key={purohit._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                        <td className="px-4 py-2 border border-neutral-300">{purohit.name}</td>
+                                        <td className="px-4 py-2 border border-neutral-300">{purohit.price}</td>
+                                        <td className="px-4 py-2 border border-neutral-300 text-center">
+                                            <button
+                                                className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
+                                                onClick={() => handleDeletePurohit(purohit._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            <div className="mb-12">
-                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
-                <div className="overflow-x-auto">
-                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                        <thead className="bg-gray-800 text-white">
-                            <tr>
-                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item) => (
-                                <tr key={item._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                    <td className="px-4 py-2 border border-neutral-300">{item.name}</td>
-                                    <td className="px-4 py-2 border border-neutral-300">{item.price}</td>
-                                    <td className="px-4 py-2 border border-neutral-300 text-center">
-                                        <button
-                                            className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                            onClick={() => handleDeleteItem(item._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+    
+                <div className="mb-12">
+                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
+                    <div className="overflow-x-auto">
+                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                            <thead className="bg-gray-800 text-white">
+                                <tr>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {items.map((item) => (
+                                    <tr key={item._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                        <td className="px-4 py-2 border border-neutral-300">{item.name}</td>
+                                        <td className="px-4 py-2 border border-neutral-300">{item.price}</td>
+                                        <td className="px-4 py-2 border border-neutral-300 text-center">
+                                            <button
+                                                className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
+                                                onClick={() => handleDeleteItem(item._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
-                <div className="overflow-x-auto">
-                    <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                        <thead className="bg-gray-800 text-white">
-                            <tr>
-                                <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {services.map((service) => (
-                                <tr key={service._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                    <td className="px-4 py-2 border border-neutral-300">{service.name}</td>
-                                    <td className="px-4 py-2 border border-neutral-300">{service.price}</td>
-                                    <td className="px-4 py-2 border border-neutral-300 text-center">
-                                        <button
-                                            className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
-                                            onClick={() => handleDeleteService(service._id)}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
+    
+                <div>
+                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
+                    <div className="overflow-x-auto">
+                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                            <thead className="bg-gray-800 text-white">
+                                <tr>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {services.map((service) => (
+                                    <tr key={service._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                                        <td className="px-4 py-2 border border-neutral-300">{service.name}</td>
+                                        <td className="px-4 py-2 border border-neutral-300">{service.price}</td>
+                                        <td className="px-4 py-2 border border-neutral-300 text-center">
+                                            <button
+                                                className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
+                                                onClick={() => handleDeleteService(service._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div className=' my-4'>
-                <Link to={"/home"}>
-                    <span className=' bg-orange-600 border rounded-xl p-1'>Go Back</span>
-                </Link>
             </div>
         </div>
     );
