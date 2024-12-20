@@ -8,7 +8,7 @@ import itemRouter from './routes/item.route.js'
 import serviceRouter from './routes/service.route.js'
 import bhaktRouter from './routes/bhakt.route.js'
 import darshanRouter from './routes/darshan.route.js'
-
+import adminDarshanRouter from './routes/admin.darshan.route.js'
 dotenv.config();
 
 mongoose.connect(process.env.MONGO)
@@ -28,7 +28,8 @@ app.use('/backend/purohit', purohitRouter);
 app.use('/backend/itemm',itemRouter);
 app.use('/backend/service',serviceRouter);
 app.use('/backend/bhakt/auth',bhaktRouter);
-app.use('/backend/bhakt/darshan',darshanRouter)
+app.use('/backend/bhakt/darshan',darshanRouter);
+app.use('/backend/darshans',adminDarshanRouter);
 
 app.use((error, req, res, next)=>{
     const statusCode = error.statusCode || 500;
