@@ -73,7 +73,6 @@ export default function Home() {
 
   const handleSubmitService = async (e) => {
     try {
-      e.preventDefault();
       const res = await fetch('/backend/service/create', {
         method: 'POST',
         headers: {
