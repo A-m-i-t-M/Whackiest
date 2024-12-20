@@ -34,4 +34,39 @@ export const getDarshans = async (req, res) => {
   }
 };
 
-export const deleteDarshan=async
+export const deleteDarshan=async(req,res)=>{
+    try {
+        const { darshanId } = req.body;
+
+        if (!darshanId) {
+            return res.status(400).json({
+                success: false,
+                message: "Darshan ID is required.",
+            });
+        }
+
+        const darshan = await Darshan.findOne({ _id: itemId, user: req.user._id });
+
+        if (!darshan) {
+            return res.status(404).json({
+                success: false,
+                message: "Idarshan not found or you don't have access to it.",
+            });
+        }
+
+        // Delete the snippet
+        await Darshan.findByIdAndDelete(darshanId);
+
+        res.status(200).json({
+            success: true,
+            message: "Darshan deleted successfully.",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Error deleting darshan.",
+            error: error.message,
+        });
+    }
+}
