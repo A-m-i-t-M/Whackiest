@@ -58,11 +58,12 @@ export default function SignUp() {
         className='border p-3 rounded-xl' 
         onChange={handleChange}/>
       
-      <input 
+      {/* <input 
         placeholder='Description' 
         id='description' type='text' 
         className='border p-3 rounded-xl' 
         onChange={handleChange}/>
+         */}
 
       <input 
         placeholder='E-Mail' 

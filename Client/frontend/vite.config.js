@@ -6,7 +6,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/backend' : {
-        target : 'http://localhost:4000',
+        target : 'http://localhost:3001',
         secure : false,
       }
     }
