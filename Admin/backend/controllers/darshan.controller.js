@@ -1,4 +1,4 @@
-import Darshan from "../models/darshan.model";
+import Darshan from "../models/darshan.model.js";
 
 export const createDarshan = async (req, res) => {
   try {
@@ -45,7 +45,7 @@ export const deleteDarshan=async(req,res)=>{
             });
         }
 
-        const darshan = await Darshan.findOne({ _id: itemId, user: req.user._id });
+        const darshan = await Darshan.findOne({ _id: darshanId, user: req.user._id });
 
         if (!darshan) {
             return res.status(404).json({

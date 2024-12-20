@@ -7,6 +7,7 @@ import purohitRouter from './routes/purohit.route.js'
 import itemRouter from './routes/item.route.js'
 import serviceRouter from './routes/service.route.js'
 import bhaktRouter from './routes/bhakt.route.js'
+import darshanRouter from './routes/darshan.route.js'
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use('/backend/purohit', purohitRouter);
 app.use('/backend/itemm',itemRouter);
 app.use('/backend/service',serviceRouter);
 app.use('/backend/bhakt/auth',bhaktRouter);
+app.use('/backend/bhakt/darshan',darshanRouter)
 
 app.use((error, req, res, next)=>{
     const statusCode = error.statusCode || 500;
