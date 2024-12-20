@@ -10,6 +10,7 @@ import BhaktHome from './pages/BhaktHome'
 import BhaktSignup from './pages/BhaktSignup'
 import Darshan from './pages/Darshan'
 import Events from './pages/Events'
+import DarshanBooking from './pages/DarshanBooking'
 export default function App() {
   return <>
     <BrowserRouter>
@@ -24,6 +25,7 @@ export default function App() {
         <Route path='/bhakt/sign-up' element={<BhaktSignup/>}/>
         <Route path='/darshan' element={<Darshan/>}/>
         <Route path='/events' element={<Events/>}/>
+        <Route path='/mandirbook' element={<DarshanBooking/>}/>
       </Routes>
     </BrowserRouter>
   </>
