@@ -2,13 +2,14 @@ import Darshan from "../models/darshan.model.js";
 
 export const createDarshan = async (req, res) => {
   try {
-    const { mandir, date, time, type, item } = req.body;
-    if (!mandir || !date || !time || !type || !item) {
+    const { mandir, mandirName, date, time, type, item } = req.body;
+    if (!mandir || !mandirName || !date || !time || !type || !item) {
       return res.status(404).json({ message: "Something is missing" });
     }
     const darshan = new Darshan({
       user: req.user._id,
       mandir,
+      mandirName,
       date,
       time,
       type,

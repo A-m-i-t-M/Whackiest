@@ -11,6 +11,10 @@ const darshanSchema=new mongoose.Schema({
         ref:'Temple',
         required:true
     },
+    mandirName:{
+        type: String,
+        required: true,
+    },
     date:{
         type:String,
         required:true,

@@ -25,6 +25,14 @@ export default function Home() {
   }
 
 
+  const handleViewBooking = async()=>{
+    try{
+      navigate("/view-bookings");
+    }catch(error){
+      console.log("Cant check bookings bro");
+    }
+  }
+
 
   return <div className='mx-auto max-w-lg'>
     <div className=' my-10'>
@@ -59,6 +67,9 @@ export default function Home() {
         </div>
       </div>
     </div>
-    <button className=' text-white border rounded-xl border-red-700 bg-red-700' onClick={handleSignOut}>Sign Out</button>
+    <div className='flex flex-row justify-between'>
+      <button className=' text-white border rounded-xl border-red-700 bg-red-700 p-1' onClick={handleSignOut}>Sign Out</button>
+      <button className=' bg-orange-700 text-black border rounded-xl p-1' onClick={handleViewBooking}>View Bookings</button>
+    </div>
   </div>
 }

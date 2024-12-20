@@ -36,19 +36,6 @@ export default function Darshan() {
     navigate("/mandirbook", {state : {mandir}});
   };
 
-
-//   return (<div>
-//     <h1> Temples:- </h1>
-//     {error && <p className=' text-red-700'>{error}</p>}
-//     <ul>
-//         {mandirs.map((mandir)=>(
-//             <li key={mandir._id}>
-//                 <h3>{mandir.username}</h3>
-//                 <h3>{mandir.description}</h3>
-//             </li>
-//         ))}
-//     </ul>
-//   </div>);
 return (
     <div>
       <h1>Temples:</h1>
