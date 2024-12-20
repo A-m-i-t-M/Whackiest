@@ -8,6 +8,8 @@ import LangingPage from './pages/LangingPage'
 import BhaktSignin from './pages/BhaktSignin'
 import BhaktHome from './pages/BhaktHome'
 import BhaktSignup from './pages/BhaktSignup'
+import Darshan from './pages/Darshan'
+import Events from './pages/Events'
 export default function App() {
   return <>
     <BrowserRouter>
@@ -20,6 +22,8 @@ export default function App() {
         <Route path='/bhakt/sign-in' element={<BhaktSignin/>}/>
         <Route path='/bhakt/home' element={<BhaktHome/>}/>
         <Route path='/bhakt/sign-up' element={<BhaktSignup/>}/>
+        <Route path='/darshan' element={<Darshan/>}/>
+        <Route path='/events' element={<Events/>}/>
       </Routes>
     </BrowserRouter>
   </>
