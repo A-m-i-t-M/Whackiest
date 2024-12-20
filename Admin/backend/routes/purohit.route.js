@@ -4,7 +4,7 @@ import { authMiddleware } from "../middleware/middleware.js";
 const router = express.Router();
 
 router.post('/create',authMiddleware, createPurohit);
-router.get('/',authMiddleware, getPurohits); 
+router.get('/',getPurohits); 
 router.post('/delete',authMiddleware, deletePurohit);
 router.get('/admin',authMiddleware,getPurohitsforAdmin)
 

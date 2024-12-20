@@ -19,6 +19,15 @@ export const signUP = async(req, res, next)=>{
     }
 }
 
+export const getAllTemples = async (req, res) => {
+    try {
+        const temples = await Temple.find({}, 'username description'); // Fetch only username and description fields
+        res.status(200).json({ temples });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching temples', error: error.message });
+    }
+};
+
 export const signIN = async (req, res, next)=>{
     const {email, password} = req.body;
     try {
