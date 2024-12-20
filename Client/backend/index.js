@@ -12,9 +12,10 @@ mongoose.connect(process.env.MONGO)
 
 const app = express();
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 
-app.listen(4000, ()=>{
+
+app.listen(3001, ()=>{
     console.log("Server is up & running");
 });
 

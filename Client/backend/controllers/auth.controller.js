@@ -5,13 +5,21 @@ import { errorHandler } from "../utils/error.js";
 
 export const signUP = async(req, res, next)=>{
     const {username, email, password} = req.body;
+    console.log("a");
+    
     const hashedPassword = bcrypt.hashSync(password, 10);
+    console.log("b");
     const newBhakt = new Bhakt({username, email, password : hashedPassword});
-
+    console.log("c");
+    
     try{
         await newBhakt.save();
+        console.log("d");
+        
         res.setHeader('Content-Type', 'application/json');
-                res.status(201).json("New User Created Successfully!");
+        console.log("e");
+        res.status(201).json("New User Created Successfully!");
+        console.log("f");
         }catch(error){
             next(errorHandler(401, 'User Already Exists!'));
         }
