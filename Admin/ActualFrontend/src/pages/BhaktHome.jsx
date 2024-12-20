@@ -1,7 +1,31 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 export default function Home() {
+
+  const navigate = useNavigate();
+
+  const handleSignOut = async()=>{
+    try{
+      const res = await fetch('/backend/auth/signout');
+      const data = await res.json();
+
+      if (data.success === false) {
+        console.log(data.error);
+      }
+
+      console.log('Signed out');
+      navigate('/');
+    }catch(error){
+      // next(error);
+      console.log("Couldnt sign out bro");
+      
+    }
+  }
+
+
+
   return <div className='mx-auto max-w-lg'>
     <div className=' my-10'>
       <h1 className='text-center font-semibold'>Welcome to Pooja Pehal</h1>
@@ -35,5 +59,6 @@ export default function Home() {
         </div>
       </div>
     </div>
+    <button className=' text-white border rounded-xl border-red-700 bg-red-700' onClick={handleSignOut}>Sign Out</button>
   </div>
 }
