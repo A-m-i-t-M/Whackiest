@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import images from '../assets/bg8.jpg'; 
 import {Link} from 'react-router-dom';
 
 export default function Details() {
@@ -7,7 +8,7 @@ export default function Details() {
     const [services, setServices] = useState([]);
     const [error, setError] = useState(null);
 
-    // Fetch purohits when the component mounts
+    // Fetch data when the component mounts
     useEffect(() => {
         const fetchPurohits = async () => {
             try {
@@ -77,78 +78,50 @@ export default function Details() {
         fetchServices();
     }, []);
 
-    // Handle deletion of a purohit
-    const handleDeletePurohit = async (purohitId) => {
+    // Handle deletion of data
+    const handleDelete = async (id, type) => {
         try {
-            const response = await fetch('/backend/purohit/delete', {
+            const endpointMap = {
+                purohit: '/backend/purohit/delete',
+                item: '/backend/itemm/delete',
+                service: '/backend/service/delete',
+            };
+
+            const response = await fetch(endpointMap[type], {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ purohitId }),
+                body: JSON.stringify({ id }),
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete purohit');
+                throw new Error(errorData.message || `Failed to delete ${type}`);
             }
 
-            // Update the list of purohits after deletion
-            setPurohits((prevPurohits) => prevPurohits.filter((p) => p._id !== purohitId));
-        } catch (err) {
-            setError(err.message);
-        }
-    };
-
-    const handleDeleteItem = async (itemId) => {
-        try {
-            const response = await fetch('/backend/itemm/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ itemId }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete item');
-            }
-
-            // Update the list of items after deletion
-            setItems((prevItems) => prevItems.filter((p) => p._id !== itemId));
-        } catch (err) {
-            setError(err.message);
-        }
-    };
-
-    const handleDeleteService = async (serviceId) => {
-        try {
-            const response = await fetch('/backend/service/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ serviceId }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete service');
-            }
-
-            // Update the list of services after deletion
-            setServices((prevServices) => prevServices.filter((p) => p._id !== serviceId));
+            if (type === 'purohit') setPurohits((prev) => prev.filter((p) => p._id !== id));
+            if (type === 'item') setItems((prev) => prev.filter((p) => p._id !== id));
+            if (type === 'service') setServices((prev) => prev.filter((p) => p._id !== id));
         } catch (err) {
             setError(err.message);
         }
     };
 
     return (
-        <div className="container mx-auto p-4 bg-peach-50">
+        <div
+            className="container mx-auto p-4"
+            style={{
+                backgroundImage: `url(${images})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                minHeight: '100vh',
+            }}
+        >
             <h1 className="text-3xl font-bold mb-8 text-center text-darkblue">Details Dashboard</h1>
             {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
+            {/* Purohit Details */}
             <div className="mb-12">
                 <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
                 <div className="overflow-x-auto">
@@ -168,7 +141,7 @@ export default function Details() {
                                     <td className="px-4 py-2 border border-neutral-300 text-center">
                                         <button
                                             className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                            onClick={() => handleDeletePurohit(purohit._id)}
+                                            onClick={() => handleDelete(purohit._id, 'purohit')}
                                         >
                                             Delete
                                         </button>
@@ -180,6 +153,7 @@ export default function Details() {
                 </div>
             </div>
 
+            {/* Item Details */}
             <div className="mb-12">
                 <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
                 <div className="overflow-x-auto">
@@ -199,7 +173,7 @@ export default function Details() {
                                     <td className="px-4 py-2 border border-neutral-300 text-center">
                                         <button
                                             className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                            onClick={() => handleDeleteItem(item._id)}
+                                            onClick={() => handleDelete(item._id, 'item')}
                                         >
                                             Delete
                                         </button>
@@ -211,6 +185,7 @@ export default function Details() {
                 </div>
             </div>
 
+            {/* Service Details */}
             <div>
                 <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
                 <div className="overflow-x-auto">
@@ -230,7 +205,7 @@ export default function Details() {
                                     <td className="px-4 py-2 border border-neutral-300 text-center">
                                         <button
                                             className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
-                                            onClick={() => handleDeleteService(service._id)}
+                                            onClick={() => handleDelete(service._id, 'service')}
                                         >
                                             Delete
                                         </button>
