@@ -4,12 +4,14 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Home from './pages/Home'
 import Details from './pages/Details'
+import LangingPage from './pages/LangingPage'
 
 export default function App() {
   return <>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<SignIn/>}/>
+        <Route path='/' element={<LangingPage/>}/>
+        <Route path='/sign-in' element={<SignIn/>}/>
         <Route path='/sign-up' element={<SignUp/>}/>
         <Route path='/review' element={<Details/>}/>
         <Route path='/home' element={<Home/>}/>

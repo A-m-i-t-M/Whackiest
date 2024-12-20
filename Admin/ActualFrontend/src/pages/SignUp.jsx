@@ -38,7 +38,7 @@ export default function SignUp() {
 
       setLoading(false);
       setError(null);
-      navigate("/");
+      navigate("/sign-in");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -104,7 +104,7 @@ export default function SignUp() {
         </form>
         <div className="flex gap-3 justify-center py-3">
           <p>Have an Account?</p>
-          <Link to={"/"}>
+          <Link to={"/sign-in"}>
             <span className="text-blue-700">Sign in</span>
           </Link>
         </div>
