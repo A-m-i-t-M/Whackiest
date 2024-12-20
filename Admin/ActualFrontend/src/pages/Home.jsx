@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import images from '../assets/bg5.png';
-
 export default function Home() {
   const [purohit, setPurohit] = useState({ name: '', price: '' });
   const [item, setItem] = useState({ name: '', price: '' });
