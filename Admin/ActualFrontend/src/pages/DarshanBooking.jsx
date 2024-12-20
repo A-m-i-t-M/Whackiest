@@ -24,11 +24,11 @@ export default function DarshanBooking() {
 
   const [items, setItems] = useState([]); // State to store fetched items
   const [formData, setFormData] = useState({
+    mandir: mandir?._id || '', // Initialize with mandir._id
     date: '',
-    timeslot: '',
+    time: '',
     type: '',
-    itemm: '',
-    mandirId: mandir?._id || '' // Initialize with mandir._id
+    item: '',
   });
 
   useEffect(() => {
@@ -83,19 +83,19 @@ export default function DarshanBooking() {
                 'Content-Type': "application/json"
             },
             body: JSON.stringify({
+                mandir: formData.mandir,
                 date: formData.date,
-                timeslot: formData.timeslot,
+                time: formData.time,
                 type: formData.type,
-                itemm: formData.itemm,
-                mandirId: formData.mandirId
+                item: formData.item,
             })
         });
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        const data = await response.json();
+        const data = await res.json();
         console.log('Form submitted successfully:', data);
     }catch(error){
         console.log(error);
@@ -106,6 +106,10 @@ export default function DarshanBooking() {
     <div>
       <h1>Darshan Booking</h1>
       <form onSubmit={handleSubmit}>
+
+        {/* Hidden input for mandirId */}
+        <input type="hidden" name="mandirId" value={formData.mandir} />
+
         <div>
           <label htmlFor="date">Date:</label>
           <input
@@ -119,11 +123,11 @@ export default function DarshanBooking() {
         </div>
 
         <div>
-          <label htmlFor="timeslot">Timeslot:</label>
+          <label htmlFor="time">Timeslot:</label>
           <select
-            id="timeslot"
-            name="timeslot"
-            value={formData.timeslot}
+            id="time"
+            name="time"
+            value={formData.time}
             onChange={handleChange}
             required
           >
@@ -144,15 +148,31 @@ export default function DarshanBooking() {
             onChange={handleChange}
             required
           >
-            <option value="">Select a type</option>
+            <option value="">Select Type</option>
+            <option value="Personal">Personal</option>
+            <option value="Group">Group</option>
+            <option value="Senior Citizen">Senior Citizen</option>
+            <option value="Women Only">Women Only</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="item">Items:</label>
+          <select
+            id="item"
+            name="item"
+            value={formData.item}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select an Item</option>
             {items.map((item) => (
               <option key={item._id} value={item._id}>{item.name}</option>
             ))}
           </select>
         </div>
 
-        {/* Hidden input for mandirId */}
-        <input type="hidden" name="mandirId" value={formData.mandirId} />
+        
 
         <button type="submit">Submit</button>
       </form>

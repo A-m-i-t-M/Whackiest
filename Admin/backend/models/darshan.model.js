@@ -24,7 +24,8 @@ const darshanSchema=new mongoose.Schema({
         required:true,
     },
     item:{
-        type:String,
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Item",
         required:true,
     }
 })
