@@ -11,6 +11,7 @@ import BhaktSignup from './pages/BhaktSignup'
 import Darshan from './pages/Darshan'
 import Events from './pages/Events'
 import DarshanBooking from './pages/DarshanBooking'
+import ViewAllBookings from './pages/ViewAllBookings'
 export default function App() {
   return <>
     <BrowserRouter>
@@ -26,6 +27,7 @@ export default function App() {
         <Route path='/darshan' element={<Darshan/>}/>
         <Route path='/events' element={<Events/>}/>
         <Route path='/mandirbook' element={<DarshanBooking/>}/>
+        <Route path='/view-bookings' element={<ViewAllBookings/>}/>
       </Routes>
     </BrowserRouter>
   </>

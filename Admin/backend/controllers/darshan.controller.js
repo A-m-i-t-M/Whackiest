@@ -8,6 +8,7 @@ export const createDarshan = async (req, res) => {
     }
     const darshan = new Darshan({
       user: req.user._id,
+      userName: req.user.username,
       mandir,
       mandirName,
       date,
