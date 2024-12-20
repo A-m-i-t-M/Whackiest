@@ -241,7 +241,7 @@ export default function Details() {
                     </table>
                 </div>
             </div>
-            <div className=' my-4 border rounded-xl'>
+            <div className=' my-4 '>
                 <Link to={"/home"}>
                     <span className=' bg-orange-600 border rounded-xl p-1'>Go Back</span>
                 </Link>

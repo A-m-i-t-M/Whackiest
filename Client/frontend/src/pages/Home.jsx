@@ -31,7 +31,7 @@ export default function Home() {
               <span className='text-center my-3 font-semibold underline'>Donations</span>
             </Link>
           </div>
-          <div className='text-justify'>This is the description part. I am not going to write much over here because CSS m mere laude lag rhe h bhai... pls help 😭</div>
+          <div className='text-justify'>This is the description part. I am not going to write much over here because CSS m mere laude lag rhe h bhai... pls help 😭 changes part over here</div>
         </div>
       </div>
     </div>
