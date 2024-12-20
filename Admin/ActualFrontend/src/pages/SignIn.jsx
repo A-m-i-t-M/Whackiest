@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-// import images from 'C:/Users/Admin/OneDrive/Desktop/codeRIT whackiest/Whackiest/Admin/ActualFrontend/src/assets/bg3.png'; // Use relative path for image import
 import images from '../assets/bg3.png'
 
 export default function SignIn() {
