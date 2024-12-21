@@ -112,11 +112,10 @@ export default function DarshanBooking() {
           <h2 className="text-orange-800 font-semibold text-lg">
             Mandir Name: <span className="font-bold">{formData.mandirName}</span>
           </h2>
-          
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
               <label
                 htmlFor="date"
@@ -159,7 +158,7 @@ export default function DarshanBooking() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
               <label
                 htmlFor="type"

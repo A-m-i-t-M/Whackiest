@@ -1,74 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-
-
-//useLocation ke sath mandir ko lana h
-//uss mandir ka jo bhi link h, usse play karna h using iframe
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import webBackground from '../assets/bg8.jpg'; // Importing the background image
 
 export default function WatchLiveStream() {
-
   const location = useLocation();
   const mandir = location.state?.mandir;
   const navigate = useNavigate();
 
   const [urls, setUrls] = useState('');
-  
-  useEffect(()=>{
 
-    const getVideo = async()=>{
-      try{
-        // console.log(mandir?._id);
-        
-        const res = await fetch("backend/livestream/",{
+  useEffect(() => {
+    const getVideo = async () => {
+      try {
+        const res = await fetch("backend/livestream/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({mandirId: mandir._id})
+          body: JSON.stringify({ mandirId: mandir._id })
         });
-        // console.log(res);
-        
-        if(!res.ok){
-          console.log("Some error happened during the api call");
+
+        if (!res.ok) {
+          console.log("Some error happened during the API call");
         }
-        
+
         const data = await res.json();
-        console.log(data);
-        console.log(data.live[0].link);
-        
         setUrls(data.live[0].link);
-        // console.log(data.link);
-        
-      }catch(error){
-        console.log("Couldnt get the video link boss");
+      } catch (error) {
+        console.log("Couldn't get the video link, boss");
       }
     };
 
     getVideo();
-  },[mandir]);
-
+  }, [mandir]);
 
   return (
-    // <div>
-    //     This is basically where the livestream will be playing.. GGs WP NT NHK NHK NHK NHK NHK NHK NHK
-    //     {urls}
-    // </div>
-    <div>
-      <h1>Watch Live Stream</h1>
-      {urls ? (
-        <iframe
-          width="560"
-          height="315"
-          src={urls}
-          title="Live Stream"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      ) : (
-        <p>Loading live stream...</p>
-      )}
+    <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: `url(${webBackground})` }}
+    >
+      <div className="bg-white bg-opacity-50 min-h-screen py-10 px-5">
+        <div className="max-w-4xl mx-auto">
+          <button
+            className="relative z-10 mt-4 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-red-600 transition"
+            onClick={() => navigate(-1)}
+          >
+            Go Back
+          </button>
+
+          <h1 className="text-center text-3xl font-bold mt-6">Watch Live Stream</h1>
+
+          {urls ? (
+            <div className="mt-10 bg-white rounded-lg shadow-lg p-5">
+              <iframe
+                width="100%"
+                height="515"
+                src={urls}
+                title="Live Stream"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="rounded-lg"
+              ></iframe>
+            </div>
+          ) : (
+            <p className="text-center mt-4">Loading live stream...</p>
+          )}
+        </div>
+      </div>
     </div>
-    
-  )
+  );
 }

@@ -28,18 +28,17 @@ export default function Home() {
     }
   };
 
-  const handleSelectLiveStream = async () =>{
-    try{
-      navigate("/select-livestream")
-    }catch(error){
-      console.log("Couldnt get the livestreams");
-      
+  const handleSelectLiveStream = async () => {
+    try {
+      navigate('/select-livestream');
+    } catch (error) {
+      console.log("Couldn't get the livestreams");
     }
-  }
+  };
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
       style={{
         backgroundImage: "url('https://img.freepik.com/premium-photo/women-indian-tradition-dresss-holding-diya-her-hand-happy-diwali-design-generative-ai_852336-22380.jpg')",
         backgroundSize: 'cover',
@@ -47,62 +46,65 @@ export default function Home() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="w-full max-w-6xl px-6 bg-white bg-opacity-50 py-10 rounded-lg">
+      <div className="w-full max-w-6xl px-4 bg-white bg-opacity-50 py-8 sm:py-12 rounded-lg">
         <div className="text-center">
-          <h1 className="text-5xl font-extrabold text-gray-900 mb-12 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-8 sm:mb-12 tracking-wide">
             Welcome to Pooja Pehal
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+          {/* Cards Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Card 1 */}
-            <div className="flex flex-col items-center bg-indigo-100 bg-opacity-70 shadow-lg rounded-2xl p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl h-80">
-              <h2 className="text-3xl font-extrabold text-indigo-900 mb-6">
+            <div className="flex flex-col items-center bg-indigo-100 bg-opacity-70 shadow-lg rounded-2xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-indigo-900 mb-4 sm:mb-6">
                 <Link to="/darshan">Regular Darshan</Link>
               </h2>
-              <p className="text-base font-semibold text-indigo-800 text-justify">
+              <p className="text-sm sm:text-base font-semibold text-indigo-800 text-justify">
                 Experience the serene and divine moments during our regular darshan. Let your soul find peace.
               </p>
             </div>
+
             {/* Card 2 */}
-            <div className="flex flex-col items-center bg-pink-100 bg-opacity-70 shadow-lg rounded-2xl p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl h-80">
-              <h2 className="text-3xl font-extrabold text-pink-900 mb-6">
+            <div className="flex flex-col items-center bg-pink-100 bg-opacity-70 shadow-lg rounded-2xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-pink-900 mb-4 sm:mb-6">
                 <Link to="/events">Special Event</Link>
               </h2>
-              <p className="text-base font-semibold text-pink-800 text-justify">
+              <p className="text-sm sm:text-base font-semibold text-pink-800 text-justify">
                 Participate in our vibrant special events filled with joy, devotion, and cultural essence.
               </p>
             </div>
+
             {/* Card 3 */}
-            <div className="flex flex-col items-center bg-green-100 bg-opacity-70 shadow-lg rounded-2xl p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl h-80">
-              <h2 className="text-3xl font-extrabold text-green-900 mb-6">
+            <div className="flex flex-col items-center bg-green-100 bg-opacity-70 shadow-lg rounded-2xl p-6 sm:p-8 transform transition duration-300 hover:scale-105 hover:shadow-2xl">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-green-900 mb-4 sm:mb-6">
                 <Link to="/donation">Donations</Link>
               </h2>
-              <p className="text-base font-semibold text-green-800 text-justify">
+              <p className="text-sm sm:text-base font-semibold text-green-800 text-justify">
                 Support the community by contributing to our initiatives. Every donation brings a smile.
               </p>
             </div>
           </div>
-          <div className="mt-12 flex flex-row justify-center gap-4">
+
+          {/* Buttons Section */}
+          <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-4">
             <button
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
               onClick={handleSignOut}
             >
               <b>Sign Out</b>
             </button>
             <button
-              className="bg-orange-700 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
+              className="bg-orange-700 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
               onClick={handleViewBooking}
             >
               <b>View Bookings</b>
             </button>
             <button
-              className="bg-orange-700 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
+              className="bg-orange-700 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
               onClick={handleSelectLiveStream}
             >
               <b>LiveStreams</b>
             </button>
-            {/* <Link>
-              <span className='bg-orange-700 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400'>LiveStreams</span>
-            </Link> */}
           </div>
         </div>
       </div>

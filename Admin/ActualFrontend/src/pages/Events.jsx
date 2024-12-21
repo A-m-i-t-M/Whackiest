@@ -58,7 +58,7 @@ export default function Events() {
 
       {error && <p className="text-red-700 text-center">{error}</p>}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
         {mandirs.map((mandir) => (
           <div
             key={mandir._id}
@@ -66,9 +66,9 @@ export default function Events() {
             onClick={() => handleCardClick(mandir)}
           >
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-semibold text-gray-800">{mandir.username}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 truncate">{mandir.username}</h3>
             </div>
-            <p className="text-gray-600 text-base">{mandir.description}</p>
+            <p className="text-gray-600 text-base mb-4 truncate">{mandir.description}</p>
             <div className="mt-4">
               <button className="bg-orange-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-orange-700 transition-colors duration-300">
                 Book Visit
