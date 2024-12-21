@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from React Router
 
-// Need to render the username, date, and timeslot
 export default function ViewAdminStuff() {
   const [darshanbookings, setDarshanBookings] = useState([]);
   const [servicebookings, setServiceBookings] = useState([]);
   const [error, setError] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [selectedBookingId, setSelectedBookingId] = useState(null); // Store the selected booking ID for deletion
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
+
+  const navigate = useNavigate(); // Initialize the navigate function
 
   useEffect(() => {
     const fetchDarshanBookings = async () => {
@@ -39,22 +41,20 @@ export default function ViewAdminStuff() {
     fetchServiceBookings();
   }, []);
 
-  const handleDeleteDarshan = async (darshanId) => {
-    setSelectedBookingId(darshanId); // Set the selected booking ID for deletion
-    setIsDialogOpen(true); // Open the confirmation dialog
+  const handleDeleteDarshan = (darshanId) => {
+    setSelectedBookingId(darshanId);
+    setIsDialogOpen(true);
   };
 
-  const handleDeleteService = async (bookingId) => {
-    setSelectedBookingId(bookingId); // Set the selected booking ID for deletion
-    setIsDialogOpen(true); // Open the confirmation dialog
+  const handleDeleteService = (bookingId) => {
+    setSelectedBookingId(bookingId);
+    setIsDialogOpen(true);
   };
 
   const confirmDelete = async () => {
     try {
       let res;
-      if (
-        darshanbookings.some((booking) => booking._id === selectedBookingId)
-      ) {
+      if (darshanbookings.some((booking) => booking._id === selectedBookingId)) {
         res = await fetch("/backend/darshans/admin/cancel", {
           method: "POST",
           headers: {
@@ -76,32 +76,37 @@ export default function ViewAdminStuff() {
         throw new Error("Delete failed");
       }
 
-      if (
-        darshanbookings.some((booking) => booking._id === selectedBookingId)
-      ) {
-        setDarshanBookings((prevBookings) =>
-          prevBookings.filter((booking) => booking._id !== selectedBookingId)
+      if (darshanbookings.some((booking) => booking._id === selectedBookingId)) {
+        setDarshanBookings((prev) =>
+          prev.filter((booking) => booking._id !== selectedBookingId)
         );
       } else {
-        setServiceBookings((prevBookings) =>
-          prevBookings.filter((booking) => booking._id !== selectedBookingId)
+        setServiceBookings((prev) =>
+          prev.filter((booking) => booking._id !== selectedBookingId)
         );
       }
 
-      setIsDialogOpen(false); // Close the dialog after deletion
+      setIsDialogOpen(false);
     } catch (error) {
       setError(error.message);
-      setIsDialogOpen(false); // Close the dialog in case of error
+      setIsDialogOpen(false);
     }
   };
 
   const cancelDelete = () => {
-    setIsDialogOpen(false); // Close the dialog without deleting
+    setIsDialogOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-orange-100 py-10 px-5">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">
+      <button
+        onClick={() => navigate(-1)} // Navigate back to the previous page
+        className="mb-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      >
+        Go Back
+      </button>
+
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
         All Bookings
       </h1>
       {error && (
@@ -110,16 +115,14 @@ export default function ViewAdminStuff() {
         </div>
       )}
 
-      <h1 className="font-bold text-2xl sm:text-3xl ml-4 text-gray-800">
-        Darshans
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 px-4">
+      <h1 className="font-bold text-2xl ml-4 text-gray-800">Darshans</h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {darshanbookings.map((booking, index) => (
           <div
             key={index}
             className="bg-gradient-to-br from-yellow-200 to-orange-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
           >
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">
               User Name: {booking.userName}
             </h2>
             <p className="text-gray-700">
@@ -141,16 +144,14 @@ export default function ViewAdminStuff() {
         ))}
       </div>
 
-      <h1 className="font-bold text-2xl sm:text-3xl ml-4 text-gray-800 mt-8">
-        Services
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 px-4">
+      <h1 className="font-bold text-2xl ml-4 text-gray-800 mt-8">Services</h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {servicebookings.map((booking, index) => (
           <div
             key={index}
             className="bg-gradient-to-br from-yellow-200 to-orange-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
           >
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+            <h2 className="text-xl font-semibold text-gray-800 mb-2">
               User Name: {booking.userName}
             </h2>
             <p className="text-gray-700">
@@ -175,7 +176,7 @@ export default function ViewAdminStuff() {
       {isDialogOpen && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center">
           <div className="bg-gradient-to-br from-yellow-200 to-orange-300 p-6 rounded-lg shadow-lg w-11/12 sm:w-80">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Do you want to delete it?
             </h2>
             <div className="flex flex-col sm:flex-row justify-around space-y-4 sm:space-y-0">
