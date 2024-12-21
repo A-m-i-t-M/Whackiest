@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Darshan() {
@@ -7,74 +7,77 @@ export default function Darshan() {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    const fetchMandirs = async()=>{
-        try{
-            const res = await fetch("/backend/auth/getalltemples", {
-                method : "GET",
-                headers: {
-                    'Content-Type' : "application/json",
-                },
-            });
-            if (!res.ok){
-                const errorData = await res.json();
-                throw new Error(errorData.message || "Failed to fetch purohits")
-            }
-            const data = await res.json();
-            setMandirs(data.temples)
-        }catch(error){
-            setError(error.message);
+  useEffect(() => {
+    const fetchMandirs = async () => {
+      try {
+        const res = await fetch('/backend/auth/getalltemples', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || 'Failed to fetch temples');
         }
-    }
-    fetchMandirs(); 
-  },[])
+        const data = await res.json();
+        setMandirs(data.temples);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+    fetchMandirs();
+  }, []);
 
   console.log(error);
   console.log(mandirs);
 
   const handleCardClick = (mandir) => {
-    navigate("/mandirbook", {state : {mandir}});
+    navigate('/mandirbook', { state: { mandir } });
   };
 
-return (
-    <div>
-      {/* <h1>Temples:</h1> */}
-
-      <div className="flex items-center">
-          <button className="relative z-10 mt-4 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-red-600 transition"
-                  onClick={()=>navigate(-1)}>Go Back</button>
-          
-          <h1 className="absolute inset-x-0 text-center font-bold text-3xl">
-            All Temples
-          </h1>
-
+  return (
+    <div
+      style={{
+        background: 'linear-gradient(to bottom right, #f9f7f1, #eae4dc)',
+        minHeight: '100vh',
+        padding: '20px',
+      }}
+    >
+      <div className="relative flex items-center mb-8">
+        <button
+          className="absolute left-0 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-red-600 transition"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
+        <h1 className="w-full text-center font-extrabold text-4xl text-gray-800 tracking-wide">
+          All Temples
+        </h1>
       </div>
 
-      {error && <p className="text-red-700">{error}</p>}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {error && <p className="text-red-700 text-center">{error}</p>}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {mandirs.map((mandir) => (
           <div
             key={mandir._id}
-            className="border p-5 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-            onClick={()=> handleCardClick(mandir)}
+            className="bg-[#FFFAE3] border border-gray-200 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 p-6 cursor-pointer"
+            onClick={() => handleCardClick(mandir)}
           >
-            {/* <dweuigdcub props={mandir}/> */}
-            <h3 className="font-bold text-lg">{mandir.username}</h3>
-            <p className="text-gray-700">{mandir.description}</p>
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-2xl font-semibold text-gray-800">{mandir.username}</h3>
+              
+            </div>
+            <p className="text-gray-600 text-base">{mandir.description}</p>
+            <div className="mt-4">
+              <button className="bg-orange-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-orange-700 transition-colors duration-300">
+                Book Visit
+              </button>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
 }
-
-
-// import React from 'react'
-
-// const Darshan = (props) => {
-//   return (
-//     <div>props._id</div>
-//   )
-// }
-
-// export default Darshan
