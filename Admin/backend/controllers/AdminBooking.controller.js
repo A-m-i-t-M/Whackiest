@@ -10,3 +10,4 @@ export const getAdminBookings = async (req, res) => {
         .json({ message: "Error fetching bookings", error: error.message });
     }
   }
+  
