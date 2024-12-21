@@ -96,7 +96,7 @@ export default function Details() {
             }}
             className="min-h-screen flex items-center justify-center p-4"
         >
-            <div className="w-full max-w-5xl bg-white bg-opacity-80 rounded-lg shadow-md p-6">
+            <div className="w-full max-w-5xl bg-orange-300 bg-opacity-80 rounded-lg shadow-md p-6">
                 <h1 className="text-3xl font-bold mb-6 text-center text-darkblue">Details Dashboard</h1>
                 {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
