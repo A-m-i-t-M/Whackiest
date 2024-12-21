@@ -1,33 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function ServiceBooking() {
+export default function MandirServiceBookClient() {
   const location = useLocation();
-  const service = location.state?.service;
+  const mandir = location.state?.mandir;
   const navigate = useNavigate();
 
-  const [items, setItems] = useState([]);
+  const [pandits, setPandits] = useState([]); // State to store fetched pandits
+  const [services, setServices] = useState([]); // State to store fetched services
   const [formData, setFormData] = useState({
-    service: service?._id || '',
-    serviceName: service?.name || '',
+    mandir: mandir?._id || '',
+    mandirName: mandir?.username || '',
+    pandit: '',
+    service: '',
     date: '',
-    time: '',
-    type: '',
-    item: '',
   });
-
-  const [isBookingDone, setIsBookingDone] = useState(false); // State for dialog box
+  const [isBookingSuccess, setIsBookingSuccess] = useState(false); // State for success message
 
   useEffect(() => {
-    const fetchItems = async () => {
-      if (service?._id) {
+    const fetchPurohits = async () => {
+      if (mandir?._id) {
         try {
-          const response = await fetch('/backend/items', {
+          const response = await fetch('/backend/purohit', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ serviceId: service._id }),
+            body: JSON.stringify({ userId: mandir._id }),
           });
 
           if (!response.ok) {
@@ -35,20 +34,43 @@ export default function ServiceBooking() {
           }
 
           const data = await response.json();
-
-          if (Array.isArray(data.items)) {
-            setItems(data.items);
-          } else {
-            console.error('Invalid data format received:', data);
+          if (Array.isArray(data.purohits)) {
+            setPandits(data.purohits);
           }
         } catch (error) {
-          console.error('Error fetching items:', error);
+          console.error('Error fetching pandits:', error);
         }
       }
     };
 
-    fetchItems();
-  }, [service]);
+    const fetchServices = async () => {
+      if (mandir?._id) {
+        try {
+          const response = await fetch('/backend/service', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userId: mandir._id }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          if (Array.isArray(data.services)) {
+            setServices(data.services);
+          }
+        } catch (error) {
+          console.error('Error fetching services:', error);
+        }
+      }
+    };
+
+    fetchPurohits();
+    fetchServices();
+  }, [mandir]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,18 +80,17 @@ export default function ServiceBooking() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const res = await fetch('/backend/service/booking/create', {
+      const res = await fetch('/backend/bhakt/booking/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          mandir: formData.mandir,
+          mandirName: formData.mandirName,
+          pandit: formData.pandit,
           service: formData.service,
-          serviceName: formData.serviceName,
           date: formData.date,
-          time: formData.time,
-          type: formData.type,
-          item: formData.item,
         }),
       });
 
@@ -79,25 +100,22 @@ export default function ServiceBooking() {
 
       const data = await res.json();
       console.log('Form submitted successfully:', data);
-
-      setIsBookingDone(true); // Show the dialog box
+      setIsBookingSuccess(true); // Show success message
     } catch (error) {
       console.log(error);
     }
   };
 
+  const closeDialog = () => {
+    setIsBookingSuccess(false); // Close the dialog when the close button is clicked
+  };
+
   return (
-    <div
-      style={{
-        background: "linear-gradient(to bottom right, #fdf6e4, #f9e0d9)",
-        minHeight: "100vh",
-        padding: "20px",
-      }}
-    >
+    <div className="bg-gradient-to-br from-yellow-50 to-pink-100 min-h-screen p-6">
       <div className="max-w-6xl mx-auto my-12 p-10 bg-yellow-50 shadow-xl rounded-lg border border-orange-300 relative">
-        <div className="relative flex items-center mb-8">
+        <div className="flex items-center mb-8">
           <button
-            className="absolute left-0 bg-orange-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition"
+            className="absolute left-3 bg-orange-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition"
             onClick={() => navigate(-1)}
           >
             Go Back
@@ -107,20 +125,16 @@ export default function ServiceBooking() {
           </h1>
         </div>
 
-        {/* Display Service Information */}
         <div className="mb-6 bg-orange-100 p-4 rounded-lg shadow-md border border-orange-300">
           <h2 className="text-orange-800 font-semibold text-lg">
-            Service Name: <span className="font-bold">{formData.serviceName}</span>
+            Mandir Name: <span className="font-bold">{formData.mandirName}</span>
           </h2>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <label
-                htmlFor="date"
-                className="block text-orange-800 font-medium mb-2"
-              >
+              <label htmlFor="date" className="block text-orange-800 font-medium mb-2">
                 Date:
               </label>
               <input
@@ -135,72 +149,44 @@ export default function ServiceBooking() {
             </div>
 
             <div>
-              <label
-                htmlFor="time"
-                className="block text-orange-800 font-medium mb-2"
-              >
-                Timeslot:
+              <label htmlFor="pandit" className="block text-orange-800 font-medium mb-2">
+                Pandits:
               </label>
               <select
-                id="time"
-                name="time"
-                value={formData.time}
+                id="pandit"
+                name="pandit"
+                value={formData.pandit}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
               >
-                <option value="">Select a timeslot</option>
-                <option value="slot1">Slot 1</option>
-                <option value="slot2">Slot 2</option>
-                <option value="slot3">Slot 3</option>
-                <option value="slot4">Slot 4</option>
+                <option value="">Select a Pandit</option>
+                {pandits.map((pandit) => (
+                  <option key={pandit._id} value={pandit.name}>
+                    {pandit.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <label
-                htmlFor="type"
-                className="block text-orange-800 font-medium mb-2"
-              >
-                Type:
+              <label htmlFor="service" className="block text-orange-800 font-medium mb-2">
+                Services:
               </label>
               <select
-                id="type"
-                name="type"
-                value={formData.type}
+                id="service"
+                name="service"
+                value={formData.service}
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
               >
-                <option value="">Select Type</option>
-                <option value="Personal">Personal</option>
-                <option value="Group">Group</option>
-                <option value="Senior Citizen">Senior Citizen</option>
-                <option value="Women Only">Women Only</option>
-              </select>
-            </div>
-
-            <div>
-              <label
-                htmlFor="item"
-                className="block text-orange-800 font-medium mb-2"
-              >
-                Items:
-              </label>
-              <select
-                id="item"
-                name="item"
-                value={formData.item}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
-              >
-                <option value="">Select an Item</option>
-                {items.map((item) => (
-                  <option key={item._id} value={item.name}>
-                    {item.name}
+                <option value="">Select a Service</option>
+                {services.map((service) => (
+                  <option key={service._id} value={service.name}>
+                    {service.name}
                   </option>
                 ))}
               </select>
@@ -215,26 +201,23 @@ export default function ServiceBooking() {
           </button>
         </form>
 
-       
-        {isBookingDone && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-yellow-50 p-8 rounded-lg shadow-lg text-center border border-orange-300">
-              <h2 className="text-2xl font-semibold text-orange-700 mb-4">
-                Booking Confirmed!
-              </h2>
-              <p className="text-gray-700">
-                Your booking has been successfully completed.
-              </p>
-              <button
-                onClick={() => setIsBookingDone(false)}
-                className="mt-6 bg-orange-500 text-white py-2 px-6 rounded-lg hover:bg-orange-600 transition"
-              >
-                Close
-              </button>
+        {/* Success Dialog */}
+        {isBookingSuccess && (
+          <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-gray-600">
+            <div className="bg-yellow-200 p-6 rounded-lg shadow-lg max-w-sm w-full">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-orange-700 font-semibold text-lg">Booking Successful!</h2>
+                <button
+                  onClick={closeDialog}
+                  className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600"
+                >
+                  X
+                </button>
+              </div>
+              <p className="text-orange-700">Your service booking has been successfully created!</p>
             </div>
           </div>
         )}
-
       </div>
     </div>
   );
