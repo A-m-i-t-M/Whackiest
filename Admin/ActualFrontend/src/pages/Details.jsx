@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import images from '../assets/bg8.jpg';
 import { useNavigate } from 'react-router-dom';
-import { IoMdArrowBack } from "react-icons/io";
+
 export default function Details() {
     const [purohits, setPurohits] = useState([]);
     const [items, setItems] = useState([]);
@@ -248,7 +248,7 @@ export default function Details() {
                             </tbody>
                         </table>
                         <div className='flex justify-center'>
-                        <button onClick={()=>navigate(-1)} className='bg-red-500 mt-8 items-center mx-auto px-4 py-2  rounded-md text-white flex gap-2'> <IoMdArrowBack/> Go Back </button>
+                        <button onClick={()=>navigate(-1)} className='bg-red-500 mt-8 items-center mx-auto px-4 py-2  rounded-md text-white flex gap-2'>  Go Back </button>
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ function LandingPage() {
           🙏Welcome to Pooja Pehal🙏
           </h1>
           <p className="text-lg md:text-2xl font-medium">
-          Bridging Devotion and Celebration – Your Gateway to Divine Experiences
+          Bridging Devotion and Technology – Your Gateway to Divine Experiences
           </p>
         </div>
 
