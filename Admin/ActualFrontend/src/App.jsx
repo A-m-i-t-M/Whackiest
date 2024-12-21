@@ -16,8 +16,10 @@ import ViewAdminStuff from './pages/ViewAdminStuff'
 import MandirServiceBookClient from './pages/MandirServiceBookClient'
 import AllLiveStreams from './pages/AllLiveStreams'
 import WatchLiveStream from './pages/WatchLiveStream'
+import Header from './components/Header'
 export default function App() {
   return <>
+    <Header/>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<LangingPage/>}/>
