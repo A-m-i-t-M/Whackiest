@@ -41,6 +41,28 @@ export default function ViewAdminStuff() {
       // console.log(bookings);
       console.log(servicebookings);
       
+      const handleDeleteService = async(bookingId)=>{
+        try{
+          const res = await fetch("/backend/bookings/admin/cancel", {
+            method: "POST",
+            headers: {
+              "Content-Type" : "application/json",
+            },
+            body: JSON.stringify({bookingId})
+          });
+    
+          if(!res.ok){
+            throw new Error("Delete nahi kar paya bro");
+          }
+    
+          setServiceBookings((prevBookings)=>
+            prevBookings.filter((booking)=>booking._id !== bookingId)
+          )
+    
+        }catch(error){
+          setError(error.message);
+        }
+      }
       
     
       return (
@@ -91,6 +113,7 @@ export default function ViewAdminStuff() {
                 <p className="text-gray-600">
                   <span className="font-medium">Date:</span> {booking.date}
                 </p>
+              <button className=' ml-64 mr-0' onClick={()=>handleDeleteService(booking._id)}>Cancel</button>
               </div>
             ))}
           </div>
