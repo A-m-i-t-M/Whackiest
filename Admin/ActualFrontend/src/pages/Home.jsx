@@ -6,6 +6,11 @@ export default function Home() {
   const [purohit, setPurohit] = useState({ name: '', price: '' });
   const [item, setItem] = useState({ name: '', price: '' });
   const [service, setService] = useState({ name: '', price: '' });
+  // const [links, setLinks] = useState({link : ''});
+
+  const [liveStreamLink, setLiveStreamLink] = useState({link: ''});
+  const [isLinkSubmitted, setIsLinkSubmitted] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChangePurohit = (e) => {
@@ -28,6 +33,13 @@ export default function Home() {
       [e.target.id]: e.target.value,
     });
   };
+
+  const handleChangeLink = (e)=>{
+    setLiveStreamLink({
+      ...liveStreamLink,
+      [e.target.id]: e.target.value,
+    })
+  }
 
   const handleSubmitPurohit = async (e) => {
     try {
@@ -116,8 +128,53 @@ export default function Home() {
     }
   }
 
-  const handleLinkSubmit = async()=>{
+  const handleLinkSubmit = async(e)=>{
     // Need to add the functionality over here
+    e.preventDefault();
+    try {
+      const res = await fetch('/backend/livestream/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(liveStreamLink),
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        console.log('Error hua bc');
+        return;
+      }
+      setIsLinkSubmitted(true);
+      console.log('Success');
+    } catch (error) {
+      console.log('Error hua bc');
+    }
+  }
+
+
+  const handleDeleteLink = async()=>{
+
+    try{
+      const res = await fetch("/backend/livestream/delete",{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+        }
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Failed to delete item');
+      }
+      setLiveStreamLink({link: ''});
+      setIsLinkSubmitted(false);
+    }catch(error){
+      console.log("was not able to delete macha");
+    }
+
+
+    
   }
 
   return (
@@ -221,13 +278,14 @@ export default function Home() {
 
         <div className="w-full border border-gray-900 rounded-xl bg-slate-500 p-4 mb-5">
           <h3 className="text-left uppercase font-semibold">Add Live Stream Link</h3>
-          <div className="flex gap-4 justify-between mt-1 align-middle">
+          {/* <div className="flex gap-4 justify-between mt-1 align-middle">
             <input
               type="text"
               name="link"
               id="link"
               placeholder="Live Stream Link"
               className="w-3/4 rounded-xl p-3 mt-1"
+              onChange={handleChangeLink}
             />
             <button
               type="submit"
@@ -236,7 +294,41 @@ export default function Home() {
             >
               Submit
             </button>
-          </div>
+          </div> */}
+
+          {/*  */}
+
+          {!isLinkSubmitted ? (
+            <div className="flex gap-4 justify-between mt-1 align-middle">
+              <input
+                type="text"
+                name="link"
+                id="link"
+                placeholder="Live Stream Link"
+                className="w-3/4 rounded-xl p-3 mt-1"
+                // value={liveStreamLink}
+                onChange={handleChangeLink}
+              />
+              <button
+                type="button"
+                onClick={handleLinkSubmit}
+                className="border rounded-xl bg-slate-700 self-center text-white py-2 px-6"
+              >
+                Submit
+              </button>
+            </div>
+          ) : (
+            <div className="flex gap-4 justify-between mt-1 align-middle">
+              <span className="w-3/4 p-3 mt-1 text-white">{liveStreamLink.link}</span>
+              <button
+                type="button"
+                onClick={handleDeleteLink}
+                className="border rounded-xl bg-red-700 self-center text-white py-2 px-6"
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-3 items-start">
