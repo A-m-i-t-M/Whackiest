@@ -9,6 +9,7 @@ export const createBooking=async(req,res)=>{
         }
         const booking=new Booking({
             user:req.user._id,
+            userName: req.user.username,
             mandir,
             mandirName,
             pandit,

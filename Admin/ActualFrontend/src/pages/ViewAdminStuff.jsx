@@ -3,27 +3,44 @@ import React, { useEffect, useState } from 'react'
 //Need to render the username, date and timeslot
 
 export default function ViewAdminStuff() {
-    const [bookings, setBookings] = useState([]);
+      const [darshanbookings, setDarshanBookings] = useState([]);
+      const [servicebookings, setServiceBookings] = useState([]);
       const [error, setError] = useState(null);
     
       useEffect(() => {
-        const fetchBookings = async () => {
+        const fetchDarshanBookings = async () => {
           try {
             const response = await fetch("backend/darshans/admin/");
             if (!response.ok) {
               throw new Error("Failed to fetch bookings");
             }
             const data = await response.json();
-            setBookings(data.darshans);
+            setDarshanBookings(data.darshans);
           } catch (err) {
             setError(err.message);
           }
         };
+
+        const fetchServiceBookings = async()=>{
+          try{
+            const res = await fetch("backend/bookings/admin");
+            if(!res.ok){
+              throw new Error("Failed to fetch the Services");
+            }
+            const data = await res.json();
+            setServiceBookings(data.bookings);
+          }catch(error){
+            setError(error.message);
+          } 
+        }
     
-        fetchBookings();
+        fetchDarshanBookings();
+        fetchServiceBookings();
       }, []);
 
-      console.log(bookings);
+      // console.log(bookings);
+      console.log(servicebookings);
+      
       
     
       return (
@@ -34,8 +51,9 @@ export default function ViewAdminStuff() {
               <p>Error: {error}</p>
             </div>
           )}
+          <h1 className=' font-bold text-2xl ml-4'>Darshans</h1>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {bookings.map((booking, index) => (
+            {darshanbookings.map((booking, index) => (
               <div
                 key={index}
                 className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
@@ -50,6 +68,28 @@ export default function ViewAdminStuff() {
                 </p>
                 <p className="text-gray-600">
                   <span className="font-medium">Item:</span> {booking.item}
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* List out these 4 thinsgs username pandit service date */}
+          <h1 className=' font-bold text-2xl ml-4'>Services</h1>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {servicebookings.map((booking, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300">
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  User Name: {booking.userName}
+                </h2>
+                <p className="text-gray-600">
+                  <span className="font-medium">Service:</span> {booking.service}
+                </p>
+                <p className="text-gray-600">
+                  <span className="font-medium">Pandit:</span> {booking.pandit}
+                </p>
+                <p className="text-gray-600">
+                  <span className="font-medium">Date:</span> {booking.date}
                 </p>
               </div>
             ))}

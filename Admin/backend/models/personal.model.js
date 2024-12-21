@@ -6,6 +6,10 @@ const bookSchema=mongoose.Schema({
         ref:'Bhakt',
         required:true,
     },
+    userName:{
+        type: String,
+        required: true,
+    },
     mandir:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Temple',
