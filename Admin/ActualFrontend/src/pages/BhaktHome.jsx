@@ -28,6 +28,15 @@ export default function Home() {
     }
   };
 
+  const handleSelectLiveStream = async () =>{
+    try{
+      navigate("/select-livestream")
+    }catch(error){
+      console.log("Couldnt get the livestreams");
+      
+    }
+  }
+
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -85,6 +94,15 @@ export default function Home() {
             >
               <b>View Bookings</b>
             </button>
+            <button
+              className="bg-orange-700 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
+              onClick={handleSelectLiveStream}
+            >
+              <b>LiveStreams</b>
+            </button>
+            {/* <Link>
+              <span className='bg-orange-700 text-white py-4 px-10 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400'>LiveStreams</span>
+            </Link> */}
           </div>
         </div>
       </div>

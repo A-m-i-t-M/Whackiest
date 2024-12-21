@@ -14,6 +14,8 @@ import DarshanBooking from './pages/DarshanBooking'
 import ViewAllBookings from './pages/ViewAllBookings'
 import ViewAdminStuff from './pages/ViewAdminStuff'
 import MandirServiceBookClient from './pages/MandirServiceBookClient'
+import AllLiveStreams from './pages/AllLiveStreams'
+import WatchLiveStream from './pages/WatchLiveStream'
 export default function App() {
   return <>
     <BrowserRouter>
@@ -32,6 +34,8 @@ export default function App() {
         <Route path='/view-bookings' element={<ViewAllBookings/>}/>
         <Route path='/view-admin-bookings' element={<ViewAdminStuff/>}/>
         <Route path='/mandir-service-book' element={<MandirServiceBookClient/>}/>
+        <Route path='/select-livestream' element={<AllLiveStreams/>}/>
+        <Route path='/watch-livestream' element={<WatchLiveStream/>}/>
       </Routes>
     </BrowserRouter>
   </>
