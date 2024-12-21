@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import images from "../assets/bg6.png";
 import web_background from "../assets/bg8.jpg";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ViewAllBookings() {
   const [bookings, setBookings] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -21,6 +24,7 @@ export default function ViewAllBookings() {
     };
 
     fetchBookings();
+    // handleDeleteDarshan();
   }, []);
 
   const getCardStyles = (mandirName) => {
@@ -36,6 +40,30 @@ export default function ViewAllBookings() {
     }
   };
 
+  const handleDeleteDarshan = async(darshanId)=>{
+    try{
+      const res = await fetch("/backend/bhakt/darshan/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json",
+        },
+        body: JSON.stringify({darshanId})
+      });
+
+      if(!res.ok){
+        throw new Error("Delete nahi kar paya bro");
+      }
+
+      setBookings((prevBookings)=>
+        prevBookings.filter((booking)=>booking._id !== darshanId)
+      )
+
+    }catch(error){
+      setError(error.message);
+    }
+  }
+  
+
   return (
     <div
       className="min-h-screen bg-cover bg-center"
@@ -44,15 +72,21 @@ export default function ViewAllBookings() {
       }}
     >
       <div className="bg-white bg-opacity-0 min-h-screen py-10 px-5">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          All Bookings
-        </h1>
+        <div className="flex items-center">
+          <button className="relative z-10 mt-4 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-red-600 transition"
+                  onClick={()=>navigate(-1)}>Go Back</button>
+          
+          <h1 className="absolute inset-x-0 text-center font-bold text-3xl">
+            All Bookings
+          </h1>
+
+        </div>
         {error && (
           <div className="text-red-500 text-center mb-4">
             <p>Error: {error}</p>
           </div>
         )}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-10">
           {bookings.map((booking, index) => (
             <div
               key={index}
@@ -75,6 +109,7 @@ export default function ViewAllBookings() {
               </p>
               <button
                 className="relative z-10 mt-4 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-red-600 transition"
+                onClick={()=>handleDeleteDarshan(booking._id)}
               >
                 Delete
               </button>

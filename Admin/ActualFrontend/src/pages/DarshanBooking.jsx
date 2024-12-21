@@ -16,11 +16,12 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function DarshanBooking() {
   const location = useLocation();
   const mandir = location.state?.mandir;
+  const navigate = useNavigate();
 
   const [items, setItems] = useState([]); // State to store fetched items
   const [formData, setFormData] = useState({
@@ -106,7 +107,18 @@ export default function DarshanBooking() {
 
   return (
     <div className=' mx-auto my-10'>
-      <h1 className=' font-semibold text-center text-3xl'>Darshan Booking</h1>
+      {/* <h1 className=' font-semibold text-center text-3xl'>Darshan Booking</h1> */}
+
+        <div className="flex items-center">
+          <button className="relative z-10 mt-4 bg-red-500 text-white text-sm font-medium py-2 px-4 rounded hover:bg-red-600 transition"
+                  onClick={()=>navigate(-1)}>Go Back</button>
+          
+          <h1 className="absolute inset-x-0 text-center font-bold text-3xl">
+            Darshan Booking
+          </h1>
+
+        </div>
+
       <form onSubmit={handleSubmit} className='flex flex-col'>
 
         {/* Hidden input for mandirId */}
