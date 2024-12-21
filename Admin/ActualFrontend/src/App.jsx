@@ -17,6 +17,7 @@ import MandirServiceBookClient from './pages/MandirServiceBookClient'
 import AllLiveStreams from './pages/AllLiveStreams'
 import WatchLiveStream from './pages/WatchLiveStream'
 import Header from './components/Header'
+import DonationPage from './pages/DonationForm'
 export default function App() {
   return <>
     <Header/>
@@ -38,6 +39,7 @@ export default function App() {
         <Route path='/mandir-service-book' element={<MandirServiceBookClient/>}/>
         <Route path='/select-livestream' element={<AllLiveStreams/>}/>
         <Route path='/watch-livestream' element={<WatchLiveStream/>}/>
+        <Route path='/donation' element={<DonationPage/>}/>
       </Routes>
     </BrowserRouter>
   </>
