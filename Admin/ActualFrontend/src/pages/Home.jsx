@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import images from '../assets/bg5.png';
 
@@ -12,6 +12,30 @@ export default function Home() {
   const [isLinkSubmitted, setIsLinkSubmitted] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const fetchLiveStreamLink = async()=>{
+      try{
+        const res = await fetch("backend/livestream/admin",{
+          method: "POST",
+          headers: {
+            "Content-Type" : "application/json",
+          }
+        });
+
+        const data = await res.json();
+        if(data.live[0].link){
+          setLiveStreamLink({link: data.live[0].link});
+          setIsLinkSubmitted(true);
+        }
+      }catch(error){
+        console.log("We messed up");
+      }
+    }
+
+    fetchLiveStreamLink();
+  },[]);
+
 
   const handleChangePurohit = (e) => {
     setPurohit({
