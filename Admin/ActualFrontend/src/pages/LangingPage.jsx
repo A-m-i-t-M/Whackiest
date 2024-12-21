@@ -21,40 +21,39 @@ function LandingPage() {
   ];
 
   return (
-    <div>
+    <div className="relative">
       {/* Slider */}
       <ImageSlider slides={slides} />
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4">
         {/* Title and Tagline in a white box */}
         <div
           className="text-center mb-10 p-6 rounded-lg shadow-lg"
           style={{
             backgroundColor: "rgba(255, 255, 255, 0.8)", // White background with 80% transparency
             color: "#002", // Black text for contrast
-            maxWidth: "90%", // Restrict width for better readability
           }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          🙏Welcome to Pooja Pehal🙏
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">
+            🙏Welcome to Pooja Pehal🙏
           </h1>
-          <p className="text-lg md:text-2xl font-medium">
-          Bridging Devotion and Technology – Your Gateway to Divine Experiences
+          <p className="text-base sm:text-lg md:text-2xl font-medium">
+            Bridging Devotion and Technology – Your Gateway to Divine Experiences
           </p>
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center items-center">
           <button
             onClick={() => navigate("/sign-in")}
-            className="px-6 py-3 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition-transform transform hover:scale-105"
+            className="px-6 py-3 text-lg font-semibold text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition-transform transform hover:scale-105 w-full sm:w-auto"
           >
             Admin
           </button>
           <button
             onClick={() => navigate("/bhakt/sign-in")}
-            className="px-6 py-3 text-lg font-semibold text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 transition-transform transform hover:scale-105"
+            className="px-6 py-3 text-lg font-semibold text-white bg-green-500 rounded-lg shadow-md hover:bg-green-600 transition-transform transform hover:scale-105 w-full sm:w-auto"
           >
             Bhakt
           </button>

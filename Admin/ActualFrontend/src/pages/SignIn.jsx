@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import images from '../assets/bg3.png'
+import images from '../assets/bg3.png';
 
 export default function SignIn() {
     const [formData, setFormData] = useState({});
@@ -16,75 +16,71 @@ export default function SignIn() {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
             setLoading(true);
             const res = await fetch("/backend/auth/signin", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formData),
             });
             const data = await res.json();
 
             if (data.success === false) {
-                setLoading(false);
                 setError(data.message);
+                setLoading(false);
                 return;
             }
 
-            setLoading(false);
             setError(null);
+            setLoading(false);
             navigate("/home");
         } catch (error) {
-            setLoading(false);
             setError(error.message);
+            setLoading(false);
         }
     };
 
     return (
         <div
+            className="flex items-center justify-center min-h-screen bg-cover bg-center px-4"
             style={{
                 backgroundImage: `url(${images})`,
-                backgroundSize: 'cover ', // Ensures the entire image fits within the container without stretching
-                backgroundPosition: 'center',
-                minHeight: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1rem',
             }}
         >
-            <div className='bg-white bg-opacity-80 p-4 max-w-lg rounded-xl'>
-                <h1 className='font-semibold my-5 text-center text-3xl'>Sign In</h1>
-                <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
+            <div className="bg-white bg-opacity-80 p-6 rounded-xl shadow-md w-full max-w-md">
+                <h1 className="text-3xl font-semibold text-center mb-6">Sign In</h1>
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <input
-                        placeholder='E-Mail'
-                        id='email'
-                        type='email'
-                        className='border p-4 rounded-xl'
+                        placeholder="E-Mail"
+                        id="email"
+                        type="email"
+                        className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         onChange={handleChange}
                     />
                     <input
-                        placeholder='Password'
-                        id='password'
-                        type='password'
-                        className='border p-4 rounded-xl'
+                        placeholder="Password"
+                        id="password"
+                        type="password"
+                        className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                         onChange={handleChange}
                     />
-                    {error && <p className='text-red-700 text-center'>{error}</p>}
+                    {error && <p className="text-red-700 text-center">{error}</p>}
                     <button
                         disabled={loading}
-                        className='border rounded-xl bg-gray-500 disabled:opacity-10 text-white p-4 hover:opacity-90'
+                        className={`p-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition disabled:opacity-50 ${
+                            loading && "cursor-not-allowed"
+                        }`}
                     >
                         {loading ? "Loading..." : "SIGN IN"}
                     </button>
                 </form>
-                <div className='flex gap-3 justify-center py-3'>
+                <div className="flex justify-center gap-2 mt-4">
                     <p>Don't have an Account?</p>
-                    <Link to={"/sign-up"}>
-                        <span className='text-blue-700'>Sign Up</span>
+                    <Link to="/sign-up" className="text-blue-600 hover:underline">
+                        Sign Up
                     </Link>
                 </div>
             </div>

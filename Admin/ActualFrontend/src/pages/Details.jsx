@@ -7,12 +7,12 @@ export default function Details() {
     const [items, setItems] = useState([]);
     const [services, setServices] = useState([]);
     const [error, setError] = useState(null);
-    const navigate=useNavigate();
-    // Fetch purohits when the component mounts
+    const navigate = useNavigate();
+
     useEffect(() => {
-        const fetchPurohits = async () => {
+        const fetchData = async (endpoint, setter) => {
             try {
-                const response = await fetch('/backend/purohit/admin', {
+                const response = await fetch(endpoint, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -21,236 +21,107 @@ export default function Details() {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch purohits');
+                    throw new Error(errorData.message || `Failed to fetch from ${endpoint}`);
                 }
 
                 const data = await response.json();
-                setPurohits(data.purohits);
+                setter(data[Object.keys(data)[0]]); // Dynamically set the key based on the response structure
             } catch (err) {
                 setError(err.message);
             }
         };
 
-        const fetchItems = async () => {
-            try {
-                const response = await fetch('/backend/itemm/admin', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch items');
-                }
-
-                const data = await response.json();
-                setItems(data.items);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-
-        const fetchServices = async () => {
-            try {
-                const response = await fetch('/backend/service/admin', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Failed to fetch services');
-                }
-
-                const data = await response.json();
-                setServices(data.services);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-
-        fetchPurohits();
-        fetchItems();
-        fetchServices();
+        fetchData('/backend/purohit/admin', setPurohits);
+        fetchData('/backend/itemm/admin', setItems);
+        fetchData('/backend/service/admin', setServices);
     }, []);
 
-    // Handle deletion of a purohit
-    const handleDeletePurohit = async (purohitId) => {
+    const handleDelete = async (endpoint, id, setter, key) => {
         try {
-            const response = await fetch('/backend/purohit/delete', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ purohitId }),
+                body: JSON.stringify({ [key]: id }),
             });
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete purohit');
+                throw new Error(errorData.message || `Failed to delete ${key}`);
             }
 
-            // Update the list of purohits after deletion
-            setPurohits((prevPurohits) => prevPurohits.filter((p) => p._id !== purohitId));
+            setter((prev) => prev.filter((item) => item._id !== id));
         } catch (err) {
             setError(err.message);
         }
     };
 
-    const handleDeleteItem = async (itemId) => {
-        try {
-            const response = await fetch('/backend/itemm/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ itemId }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete item');
-            }
-
-            // Update the list of items after deletion
-            setItems((prevItems) => prevItems.filter((p) => p._id !== itemId));
-        } catch (err) {
-            setError(err.message);
-        }
-    };
-
-    const handleDeleteService = async (serviceId) => {
-        try {
-            const response = await fetch('/backend/service/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ serviceId }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to delete service');
-            }
-
-            // Update the list of services after deletion
-            setServices((prevServices) => prevServices.filter((p) => p._id !== serviceId));
-        } catch (err) {
-            setError(err.message);
-        }
-    };
+    const renderTable = (data, deleteHandler, deleteKey) => (
+        <div className="overflow-x-auto">
+            <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
+                <thead className="bg-gray-800 text-white">
+                    <tr>
+                        <th className="px-4 py-2 border border-neutral-300 bg-lightyellow text-left">Name</th>
+                        <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
+                        <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((item) => (
+                        <tr key={item._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
+                            <td className="px-4 py-2 border border-neutral-300">{item.name}</td>
+                            <td className="px-4 py-2 border border-neutral-300">{item.price}</td>
+                            <td className="px-4 py-2 border border-neutral-300 text-center">
+                                <button
+                                    className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
+                                    onClick={() => deleteHandler(item._id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 
     return (
         <div
-              style={{
+            style={{
                 backgroundImage: `url(${images})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-              }}
-            >
-            <div className="container mx-auto p-4 bg-opacity-90 rounded-lg shadow-md">
-                <h1 className="text-3xl font-bold mb-8 text-center text-darkblue">Details Dashboard</h1>
+            }}
+            className="min-h-screen flex items-center justify-center p-4"
+        >
+            <div className="w-full max-w-5xl bg-white bg-opacity-80 rounded-lg shadow-md p-6">
+                <h1 className="text-3xl font-bold mb-6 text-center text-darkblue">Details Dashboard</h1>
                 {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
-    
-                <div className="mb-12">
+
+                <div className="mb-8">
                     <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                            <thead className="bg-gray-800 text-white">
-                                <tr>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {purohits.map((purohit) => (
-                                    <tr key={purohit._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                        <td className="px-4 py-2 border border-neutral-300">{purohit.name}</td>
-                                        <td className="px-4 py-2 border border-neutral-300">{purohit.price}</td>
-                                        <td className="px-4 py-2 border border-neutral-300 text-center">
-                                            <button
-                                                className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                                onClick={() => handleDeletePurohit(purohit._id)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    {renderTable(purohits, (id) => handleDelete('/backend/purohit/delete', id, setPurohits, 'purohitId'), 'purohitId')}
                 </div>
-    
-                <div className="mb-12">
+
+                <div className="mb-8">
                     <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                            <thead className="bg-gray-800 text-white">
-                                <tr>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {items.map((item) => (
-                                    <tr key={item._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                        <td className="px-4 py-2 border border-neutral-300">{item.name}</td>
-                                        <td className="px-4 py-2 border border-neutral-300">{item.price}</td>
-                                        <td className="px-4 py-2 border border-neutral-300 text-center">
-                                            <button
-                                                className="bg-orange-500 text-white px-4 py-2 rounded shadow hover:bg-orange-600 transition duration-200"
-                                                onClick={() => handleDeleteItem(item._id)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    {renderTable(items, (id) => handleDelete('/backend/itemm/delete', id, setItems, 'itemId'), 'itemId')}
                 </div>
-    
+
                 <div>
                     <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
-                    <div className="overflow-x-auto">
-                        <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                            <thead className="bg-gray-800 text-white">
-                                <tr>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left bg-lightyellow">Name</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                                    <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {services.map((service) => (
-                                    <tr key={service._id} className="bg-yellow-50 hover:bg-yellow-100 transition duration-200">
-                                        <td className="px-4 py-2 border border-neutral-300">{service.name}</td>
-                                        <td className="px-4 py-2 border border-neutral-300">{service.price}</td>
-                                        <td className="px-4 py-2 border border-neutral-300 text-center">
-                                            <button
-                                                className="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600 transition duration-200"
-                                                onClick={() => handleDeleteService(service._id)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                        <div className='flex justify-center'>
-                        <button onClick={()=>navigate(-1)} className='bg-red-500 mt-8 items-center mx-auto px-4 py-2  rounded-md text-white flex gap-2'>  Go Back </button>
-                        </div>
-                    </div>
+                    {renderTable(services, (id) => handleDelete('/backend/service/delete', id, setServices, 'serviceId'), 'serviceId')}
+                </div>
+
+                <div className="flex justify-center mt-6">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="bg-red-500 text-white px-6 py-2 rounded shadow hover:bg-red-600 transition duration-200"
+                    >
+                        Go Back
+                    </button>
                 </div>
             </div>
         </div>

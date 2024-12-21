@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import images from '../assets/bg3.png'
-
+import images from '../assets/bg3.png';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -17,8 +16,8 @@ export default function SignUp() {
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       setLoading(true);
       const res = await fetch("/backend/auth/signup", {
         method: "POST",
@@ -30,58 +29,51 @@ export default function SignUp() {
       const data = await res.json();
 
       if (data.success === false) {
-        setLoading(false);
         setError(data.message);
+        setLoading(false);
         return;
       }
 
-      setLoading(false);
       setError(null);
+      setLoading(false);
       navigate("/sign-in");
     } catch (error) {
-      setLoading(false);
       setError(error.message);
+      setLoading(false);
     }
   };
 
   return (
     <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center px-4"
       style={{
         backgroundImage: `url(${images})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '1rem',
       }}
     >
-      <div className="bg-white bg-opacity-80 mx-auto p-4 max-w-lg rounded-xl">
-        <h1 className="font-semibold my-5 text-center text-3xl">Sign Up</h1>
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+      <div className="bg-white bg-opacity-80 shadow-md p-6 rounded-xl w-full max-w-lg">
+        <h1 className="text-3xl font-semibold text-center mb-6">Sign Up</h1>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
             placeholder="Username"
             id="username"
             type="text"
-            className="border p-3 rounded-xl"
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             onChange={handleChange}
           />
 
-          {/* <input
+          <textarea
             placeholder="Description"
             id="description"
-            type="text"
-            className="border p-3 rounded-xl"
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            rows={5}
             onChange={handleChange}
-          /> */}
-          <textarea placeholder='Description' id='description' className='border p-3 rounded-xl' onChange={handleChange} rows={5}></textarea>
+          ></textarea>
 
           <input
             placeholder="E-Mail"
             id="email"
             type="email"
-            className="border p-3 rounded-xl"
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             onChange={handleChange}
           />
 
@@ -89,23 +81,25 @@ export default function SignUp() {
             placeholder="Password"
             id="password"
             type="password"
-            className="border p-3 rounded-xl"
+            className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             onChange={handleChange}
           />
 
-          {error && <p className="text-red-700">{error}</p>}
+          {error && <p className="text-red-700 text-center">{error}</p>}
 
           <button
             disabled={loading}
-            className="border rounded-xl bg-gray-500 disabled:opacity-10 text-white p-4 hover:opacity-90"
+            className={`p-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition disabled:opacity-50 ${
+              loading && "cursor-not-allowed"
+            }`}
           >
             {loading ? "Loading..." : "SIGN UP"}
           </button>
         </form>
-        <div className="flex gap-3 justify-center py-3">
+        <div className="flex justify-center gap-2 mt-4">
           <p>Have an Account?</p>
-          <Link to={"/sign-in"}>
-            <span className="text-blue-700">Sign in</span>
+          <Link to="/sign-in" className="text-blue-600 hover:underline">
+            Sign in
           </Link>
         </div>
       </div>
