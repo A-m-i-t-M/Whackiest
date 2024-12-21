@@ -39,7 +39,30 @@ export default function ViewAdminStuff() {
       }, []);
 
       // console.log(bookings);
-      console.log(servicebookings);
+      // console.log(servicebookings);
+
+      const handleDeleteDarshan = async(darshanId)=>{
+        try{
+          const res = await fetch("/backend/darshans/admin/cancel", {
+            method: "POST",
+            headers: {
+              "Content-Type" : "application/json",
+            },
+            body: JSON.stringify({darshanId})
+          });
+    
+          if(!res.ok){
+            throw new Error("Delete nahi kar paya bro");
+          }
+    
+          setDarshanBookings((prevBookings)=>
+            prevBookings.filter((booking)=>booking._id !== darshanId)
+          )
+    
+        }catch(error){
+          setError(error.message);
+        }
+      }
       
       const handleDeleteService = async(bookingId)=>{
         try{
@@ -91,6 +114,7 @@ export default function ViewAdminStuff() {
                 <p className="text-gray-600">
                   <span className="font-medium">Item:</span> {booking.item}
                 </p>
+                <button className=' ml-64 mr-0' onClick={()=>handleDeleteDarshan(booking._id)}>Cancel</button>
               </div>
             ))}
           </div>
