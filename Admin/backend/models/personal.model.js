@@ -11,14 +11,18 @@ const bookSchema=mongoose.Schema({
         ref:'Temple',
         required:true,
     },
+    mandirName:{
+        type: String,
+        required:  true,
+    },
     pandit:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Purohit',
+        type:String,
+        
         required:true,
     },
     service:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Service',
+        type:String,
+        
         required:true
     },
     date:{

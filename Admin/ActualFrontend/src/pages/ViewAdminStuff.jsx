@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 //Need to render the username, date and timeslot
 
 export default function ViewAdminStuff() {
-  const [bookings, setBookings] = useState([]);
+    const [bookings, setBookings] = useState([]);
       const [error, setError] = useState(null);
     
       useEffect(() => {

@@ -3,13 +3,14 @@ import Booking from "../models/personal.model.js";
 
 export const createBooking=async(req,res)=>{
     try{
-        const {mandir,pandit,service,date}= req.body;
-        if(!mandir||!pandit||!service||!date){
+        const {mandir,mandirName, pandit,service,date}= req.body;
+        if(!mandir|| !mandirName ||!pandit||!service||!date){
             return res.status(404).json({ message: "Something is missing" });
         }
         const booking=new Booking({
             user:req.user._id,
             mandir,
+            mandirName,
             pandit,
             service,
             date,
