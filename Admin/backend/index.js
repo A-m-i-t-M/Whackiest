@@ -12,7 +12,7 @@ import adminDarshanRouter from './routes/admin.darshan.route.js'
 import bookingRouter from './routes/booking.route.js'
 import adminBookingRouter from './routes/admin.booking.route.js'
 import livestreamRouter from './routes/livestream.route.js'
-
+import qaRouter from "./routes/qa.routes.js"
 
 dotenv.config();
 
@@ -38,7 +38,7 @@ app.use('/backend/darshans',adminDarshanRouter);
 app.use('/backend/bhakt/booking',bookingRouter);
 app.use('/backend/bookings',adminBookingRouter);
 app.use('/backend/livestream',livestreamRouter);
-
+app.use('/backend/qas',qaRouter);
 
 app.use((error, req, res, next)=>{
     const statusCode = error.statusCode || 500;

@@ -34,6 +34,15 @@ export const getLivestream= async(req,res)=>{
       }
 }
 
+export const getAdminLiveStream=async(req,res)=>{
+    try {
+        const live = await Livestream.find({ user: req.user._id });// Find notebooks linked to the logged-in user
+        res.status(200).json({ live });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching live', error: error.message });
+    }
+}
+
 export const deleteLivestream=async(req,res)=>{
     try{
         // const live = await Livestream.findOne({ user: req.user._id });
