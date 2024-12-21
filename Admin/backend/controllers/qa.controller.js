@@ -22,7 +22,7 @@ export const createQuestion=async(req,res)=>{
 
 export const getQuestionsForAdmin=async(req,res)=>{
     try{
-        const qas=await Darshan.find({mandir:req.user._id});
+        const qas=await QA.find({mandir:req.user._id});
         res.status(200).json({qas})
     }catch(error){
         res.status(500).json({ message: "Error fetching qas", error: error.message });
@@ -31,7 +31,7 @@ export const getQuestionsForAdmin=async(req,res)=>{
 
 export const getQAsforClient=async(req,res)=>{
     try{
-        const qas=await Darshan.find({user:req.user._id});
+        const qas=await QA.find({user:req.user._id});
         res.status(200).json({qas})
     }catch(error){
         res.status(500).json({ message: "Error fetching qas", error: error.message });
