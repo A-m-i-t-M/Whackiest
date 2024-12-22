@@ -59,12 +59,12 @@ export default function Details() {
 
     const renderTable = (data, deleteHandler, deleteKey) => (
         <div className="overflow-x-auto">
-            <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-lg">
-                <thead className="bg-gray-800 text-white">
+            <table className="table-auto w-full border-collapse border border-neutral-300 shadow-lg rounded-2xl">
+                <thead className=" text-white dark:bg-slate-800 bg-slate-200">
                     <tr>
-                        <th className="px-4 py-2 border border-neutral-300 bg-lightyellow text-left">Name</th>
-                        <th className="px-4 py-2 border border-neutral-300 text-left">Price</th>
-                        <th className="px-4 py-2 border border-neutral-300 text-center">Actions</th>
+                        <th className="px-4 py-2 border border-neutral-300 bg-lightyellow text-left dark:text-white text-orange-400">Name</th>
+                        <th className="px-4 py-2 border border-neutral-300 text-left dark:text-white text-orange-400">Price</th>
+                        <th className="px-4 py-2 border border-neutral-300 text-center dark:text-white text-orange-400">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,22 +96,22 @@ export default function Details() {
             }}
             className="min-h-screen flex items-center justify-center p-4"
         >
-            <div className="w-full max-w-5xl bg-orange-300 bg-opacity-80 rounded-lg shadow-md p-6">
-                <h1 className="text-3xl font-bold mb-6 text-center text-darkblue">Details Dashboard</h1>
+            <div className="w-full max-w-5xl bg-neutral-200 bg-opacity-40 dark:bg-gray-900 dark:bg-opacity-95 rounded-lg shadow-md p-6">
+                <h1 className="text-3xl font-bold mb-6 text-center text-darkblue dark:text-purple-300">Details Dashboard</h1>
                 {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
 
                 <div className="mb-8">
-                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Purohit Details</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-left ml-1 text-darkblue dark:text-purple-200">Purohit Details</h2>
                     {renderTable(purohits, (id) => handleDelete('/backend/purohit/delete', id, setPurohits, 'purohitId'), 'purohitId')}
                 </div>
 
                 <div className="mb-8">
-                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Item Details</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-left ml-1 text-darkblue dark:text-purple-200">Item Details</h2>
                     {renderTable(items, (id) => handleDelete('/backend/itemm/delete', id, setItems, 'itemId'), 'itemId')}
                 </div>
 
                 <div>
-                    <h2 className="text-xl font-semibold mb-4 text-center text-darkblue">Service Details</h2>
+                    <h2 className="text-xl font-semibold mb-4 text-left ml-1 text-darkblue dark:text-purple-200">Service Details</h2>
                     {renderTable(services, (id) => handleDelete('/backend/service/delete', id, setServices, 'serviceId'), 'serviceId')}
                 </div>
 
