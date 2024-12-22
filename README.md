@@ -25,6 +25,10 @@ The **Client Interface** is designed for devotees and offers the following optio
 #### Donations  
 - Enter a donation amount and complete the transaction securely using Stripe Payments Gateway API.  
 
+### Chotu_Nandi: Your Mandir Query Companion 🙏
+
+Chotu_Nandi is an interactive chatbot powered by Botpress and ChatGPT 4.0 mini, designed to answer all your general queries about temples across India. Whether you're looking for directions, nearby temples, or the best times to visit, Chotu_Nandi has got you covered with accurate and friendly responses. Perfect for travelers and devotees alike!
+
 ## How to Use
 
 - Clone the repository.  
