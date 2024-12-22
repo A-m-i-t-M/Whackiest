@@ -25,9 +25,17 @@ The **Client Interface** is designed for devotees and offers the following optio
 #### Donations  
 - Enter a donation amount and complete the transaction securely.  
 
+## How to Use
 
-
-## License  
-This project is licensed under the [MIT License](LICENSE).  
-
----  
+- Clone the repository.  
+- Open **two terminals**:  
+  - In the first terminal, navigate to the `ActualFrontend` folder.  
+  - In the second terminal, navigate to the `backend` folder.  
+- Run the following command in **both terminals**:  
+  npm i  
+    
+- Start the application by running the following command in **both terminals**:    
+  npm run dev  
+    
+- The app should now run successfully.  
+- If you encounter any issues, kindly create an issue in the repository and post it.  
