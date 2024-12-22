@@ -205,14 +205,14 @@ export default function Home() {
         padding: "2rem",
       }}
     >
-      <div className="bg-white bg-opacity-80 mx-auto p-4 rounded-xl shadow-lg w-full max-w-4xl">
-        <h1 className="text-center font-bold uppercase text-2xl mb-5">
+      <div className=" bg-neutral-200 bg-opacity-80 mx-auto p-4 rounded-xl shadow-lg w-full max-w-4xl dark:bg-gray-900">
+        <h1 className="text-center font-bold uppercase text-2xl mb-5 dark:text-purple-300">
           Current Temple
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
-          <div className="border border-gray-900 rounded-xl bg-slate-500 p-4">
-            <h3 className="text-center uppercase font-semibold">
+          <div className="border border-gray-900 rounded-xl dark:bg-slate-500 bg-slate-200 p-4">
+            <h3 className="text-center uppercase font-semibold dark:text-white text-orange-400">
               Add Purohits
             </h3>
             <form className="my-5" onSubmit={handleSubmitPurohit}>
@@ -233,15 +233,15 @@ export default function Home() {
                   className="border p-3 rounded-xl text-gray-600"
                   onChange={handleChangePurohit}
                 />
-                <button className="border rounded-xl bg-slate-700 w-40 self-center text-white py-2">
+                <button className="border rounded-xl dark:bg-slate-700 bg-slate-400 w-40 self-center dark:text-white text-black py-2 border-black">
                   Add Purohit
                 </button>
               </div>
             </form>
           </div>
 
-          <div className="border border-gray-900 rounded-xl bg-slate-500 p-4">
-            <h3 className="text-center uppercase font-semibold">Add Items</h3>
+          <div className="border border-gray-900 rounded-xl dark:bg-slate-500 bg-slate-200 p-4">
+            <h3 className="text-center uppercase font-semibold dark:text-white text-orange-400">Add Items</h3>
             <form className="my-5" onSubmit={handleSubmitItem}>
               <div className="flex flex-col justify-center gap-5">
                 <input
@@ -260,15 +260,15 @@ export default function Home() {
                   className="border p-3 rounded-xl text-gray-600"
                   onChange={handleChangeItem}
                 />
-                <button className="border rounded-xl bg-slate-700 w-40 self-center text-white py-2">
+                <button className="border rounded-xl dark:bg-slate-700 bg-slate-400 w-40 self-center dark:text-white text-black py-2 border-black">
                   Add Item
                 </button>
               </div>
             </form>
           </div>
 
-          <div className="border border-gray-900 rounded-xl bg-slate-500 p-4">
-            <h3 className="text-center uppercase font-semibold">
+          <div className="border border-gray-900 rounded-xl dark:bg-slate-500 bg-slate-200 p-4">
+            <h3 className="text-center uppercase font-semibold dark:text-white text-orange-400">
               Add Services
             </h3>
             <form className="my-5" onSubmit={handleSubmitService}>
@@ -289,7 +289,7 @@ export default function Home() {
                   className="border p-3 rounded-xl text-gray-600"
                   onChange={handleChangeService}
                 />
-                <button className="border rounded-xl bg-slate-700 w-40 self-center text-white py-2">
+                <button className="border rounded-xl dark:bg-slate-700 bg-slate-400 w-40 self-center dark:text-white text-black py-2 border-black">
                   Add Service
                 </button>
               </div>
@@ -297,8 +297,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-full border border-gray-900 rounded-xl bg-slate-500 p-4 mb-5">
-          <h3 className="text-left uppercase font-semibold">
+        <div className="w-full border border-gray-900 rounded-xl dark:bg-slate-500 bg-slate-200 p-4 mb-5">
+          <h3 className="text-left uppercase font-semibold dark:text-white text-orange-400">
             Add Live Stream Link
           </h3>
           {!isLinkSubmitted ? (
@@ -308,7 +308,7 @@ export default function Home() {
                 name="link"
                 id="link"
                 placeholder="Live Stream Link"
-                className="w-3/4 rounded-xl p-3 mt-1"
+                className="w-3/4 rounded-xl p-3 mt-1 border "
                 onChange={handleChangeLink}
               />
               <button
@@ -321,13 +321,13 @@ export default function Home() {
             </div>
           ) : (
             <div className="flex gap-4 justify-between mt-1 align-middle">
-              <span className="w-3/4 p-3 mt-1 text-white">
+              <span className="w-3/4 p-3 mt-1 text-black border rounded-xl dark:border-purple-300 dark:bg-white dark:text-black border-black bg-slate-400">
                 {liveStreamLink.link}
               </span>
               <button
                 type="button"
                 onClick={handleDeleteLink}
-                className="border rounded-xl bg-red-700 self-center text-white py-2 px-6"
+                className="border rounded-xl bg-red-700 self-center text-white py-2 px-6 border-red-700"
               >
                 Delete
               </button>
