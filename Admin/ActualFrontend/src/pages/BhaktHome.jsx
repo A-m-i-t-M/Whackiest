@@ -36,6 +36,14 @@ export default function Home() {
     }
   };
 
+  const handleFAQ = async()=>{
+    try{
+      navigate("/discussions");
+    }catch(error){
+      console.log("Unable to load Q&As"); 
+    }
+  }
+
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8"
@@ -48,9 +56,14 @@ export default function Home() {
     >
       <div className="w-full max-w-6xl px-4 bg-neutral-200 dark:bg-slate-900 dark:bg-opacity-60 bg-opacity-50 py-8 sm:py-12 rounded-lg">
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-purple-300 mb-8 sm:mb-12 tracking-wide">
-            Welcome to Pooja Pehal
-          </h1>
+
+          <div className='flex flex-row items-center align-middle'>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-purple-300 mb-8 sm:mb-12 tracking-wide ml-56">
+              Welcome to Pooja Pehal
+            </h1>
+            <button className='border border-yellow-400 py-2 px-4 rounded-lg h-12 ml-56 mb-10 dark:bg-neutral-300' onClick={handleFAQ}>FAQs</button>
+
+          </div>
 
           {/* Cards Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

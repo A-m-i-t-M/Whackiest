@@ -18,6 +18,9 @@ import AllLiveStreams from './pages/AllLiveStreams'
 import WatchLiveStream from './pages/WatchLiveStream'
 import Header from './components/Header'
 import DonationPage from './pages/DonationForm'
+import QuestionAndAnswers from './pages/QuestionAndAnswers'
+import QnAform from './pages/QnAform'
+import Answers from './pages/Answers'
 export default function App() {
   return <>
     <Header/>
@@ -40,6 +43,9 @@ export default function App() {
         <Route path='/select-livestream' element={<AllLiveStreams/>}/>
         <Route path='/watch-livestream' element={<WatchLiveStream/>}/>
         <Route path='/donation' element={<DonationPage/>}/>
+        <Route path='/discussions' element={<QuestionAndAnswers/>}/>
+        <Route path='/qna' element={<QnAform/>}/>
+        <Route path='/answers' element={<Answers/>}/>
       </Routes>
     </BrowserRouter>
   </>
