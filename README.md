@@ -23,7 +23,7 @@ The **Client Interface** is designed for devotees and offers the following optio
 - Watch live streams of Aarti ceremonies or other temple events for the selected temple.  
 
 #### Donations  
-- Enter a donation amount and complete the transaction securely.  
+- Enter a donation amount and complete the transaction securely using Stripe Payments Gateway API.  
 
 ## How to Use
 
