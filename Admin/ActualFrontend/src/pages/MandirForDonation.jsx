@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Events() {
+export default function Darshan() {
   const [mandirs, setMandirs] = useState([]);
   const [error, setError] = useState(null);
 
@@ -33,7 +33,7 @@ export default function Events() {
   console.log(mandirs);
 
   const handleCardClick = (mandir) => {
-    navigate('/mandir-service-book', { state: { mandir } });
+    navigate('/confirm-donation', { state: { mandir } });
   };
 
   return (
@@ -72,7 +72,7 @@ export default function Events() {
             <p className="text-gray-600 text-base dark:text-neutral-200">{mandir.description}</p>
             <div className="mt-4">
               <button className="bg-orange-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-orange-700 transition-colors duration-300">
-                Book Service
+                Contribute
               </button>
             </div>
           </div>

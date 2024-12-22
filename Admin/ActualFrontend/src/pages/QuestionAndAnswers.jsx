@@ -74,7 +74,7 @@ export default function QuestionAndAnswers() {
             <p className="text-gray-600 text-base dark:text-neutral-200">{mandir.description}</p>
             <div className="mt-4">
               <button className="bg-orange-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-orange-700 transition-colors duration-300">
-                Book Visit
+                Enquire
               </button>
             </div>
           </div>

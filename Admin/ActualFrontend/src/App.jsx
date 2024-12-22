@@ -21,6 +21,7 @@ import DonationPage from './pages/DonationForm'
 import QuestionAndAnswers from './pages/QuestionAndAnswers'
 import QnAform from './pages/QnAform'
 import Answers from './pages/Answers'
+import MandirForDonation from './pages/MandirForDonation'
 export default function App() {
   return <>
     <Header/>
@@ -42,7 +43,8 @@ export default function App() {
         <Route path='/mandir-service-book' element={<MandirServiceBookClient/>}/>
         <Route path='/select-livestream' element={<AllLiveStreams/>}/>
         <Route path='/watch-livestream' element={<WatchLiveStream/>}/>
-        <Route path='/donation' element={<DonationPage/>}/>
+        <Route path='/donation' element={<MandirForDonation/>}/>
+        <Route path='/confirm-donation' element={<DonationPage/>}/>
         <Route path='/discussions' element={<QuestionAndAnswers/>}/>
         <Route path='/qna' element={<QnAform/>}/>
         <Route path='/answers' element={<Answers/>}/>

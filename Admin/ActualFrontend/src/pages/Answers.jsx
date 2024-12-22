@@ -37,8 +37,10 @@ export default function Answers() {
 
       console.log(items);
 
-      const handleDeleteMe = async(qaId, e)=>{
+      const handleDeleteMe = async(qaId)=>{
         // e.preventDefault();
+        console.log(qaId);
+        
         try{
             const res = await fetch("",{
                 method: "POST",
@@ -111,3 +113,5 @@ export default function Answers() {
         </div>
   )
 }
+
+
