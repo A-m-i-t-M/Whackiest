@@ -88,13 +88,14 @@ export default function DarshanBooking() {
 
   return (
     <div
-      style={{
-        background: "linear-gradient(to bottom right, #fdf6e4, #f9e0d9)",
-        minHeight: "100vh",
-        padding: "20px",
-      }}
+      // style={{
+      //   background: "linear-gradient(to bottom right, #fdf6e4, #f9e0d9)",
+      //   minHeight: "100vh",
+      //   padding: "20px",
+      // }}
+      className='min-h-screen p-5 bg-gradient-to-br from-[#fdf6e4] to-[#f9e0d9] dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-500'
     >
-      <div className="max-w-6xl mx-auto my-12 p-10 bg-yellow-50 shadow-xl rounded-lg border border-orange-300 relative">
+      <div className="max-w-6xl mx-auto my-12 p-10 bg-yellow-50 dark:bg-opacity-20  shadow-xl rounded-lg border border-orange-300 relative">
         <div className="relative flex items-center mb-8">
           <button
             className="absolute left-0 bg-orange-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition"
@@ -102,15 +103,15 @@ export default function DarshanBooking() {
           >
             Go Back
           </button>
-          <h1 className="w-full text-center font-extrabold text-4xl text-orange-700 tracking-wide">
+          <h1 className="w-full text-center font-extrabold text-4xl text-orange-700 dark:text-purple-300 tracking-wide">
             Darshan Booking
           </h1>
         </div>
 
         {/* Display Mandir Information */}
-        <div className="mb-6 bg-orange-100 p-4 rounded-lg shadow-md border border-orange-300">
-          <h2 className="text-orange-800 font-semibold text-lg">
-            Mandir Name: <span className="font-bold">{formData.mandirName}</span>
+        <div className="mb-6 bg-orange-100 dark:bg-neutral-300 p-4 rounded-lg shadow-md border border-orange-300">
+          <h2 className="text-orange-800 font-bold text-lg">
+            Mandir Name: <span className="font-semibold">{formData.mandirName}</span>
           </h2>
         </div>
 
@@ -119,7 +120,7 @@ export default function DarshanBooking() {
             <div>
               <label
                 htmlFor="date"
-                className="block text-orange-800 font-medium mb-2"
+                className="block text-orange-800 dark:text-purple-400 font-bold mb-2"
               >
                 Date:
               </label>
@@ -130,14 +131,14 @@ export default function DarshanBooking() {
                 value={formData.date}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               />
             </div>
 
             <div>
               <label
                 htmlFor="time"
-                className="block text-orange-800 font-medium mb-2"
+                className="block text-orange-800 dark:text-purple-400 font-bold mb-2"
               >
                 Timeslot:
               </label>
@@ -147,7 +148,7 @@ export default function DarshanBooking() {
                 value={formData.time}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               >
                 <option value="">Select a timeslot</option>
                 <option value="slot1">Slot 1</option>
@@ -162,7 +163,7 @@ export default function DarshanBooking() {
             <div>
               <label
                 htmlFor="type"
-                className="block text-orange-800 font-medium mb-2"
+                className="block text-orange-800 dark:text-purple-400 font-bold mb-2"
               >
                 Type:
               </label>
@@ -172,7 +173,7 @@ export default function DarshanBooking() {
                 value={formData.type}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               >
                 <option value="">Select Type</option>
                 <option value="Personal">Personal</option>
@@ -185,7 +186,7 @@ export default function DarshanBooking() {
             <div>
               <label
                 htmlFor="item"
-                className="block text-orange-800 font-medium mb-2"
+                className="block text-orange-800 dark:text-purple-400 font-bold mb-2"
               >
                 Items:
               </label>
@@ -195,7 +196,7 @@ export default function DarshanBooking() {
                 value={formData.item}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               >
                 <option value="">Select an Item</option>
                 {items.map((item) => (
@@ -209,7 +210,7 @@ export default function DarshanBooking() {
 
           <button
             type="submit"
-            className="w-full bg-orange-500 text-white text-lg font-semibold py-4 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+            className="w-full bg-orange-500 dark:text-white text-lg font-semibold py-4 rounded-lg shadow-md hover:bg-orange-600 transition-all"
           >
             Book Now
           </button>

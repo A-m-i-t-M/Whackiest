@@ -111,30 +111,30 @@ export default function MandirServiceBookClient() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-yellow-50 to-pink-100 min-h-screen p-6">
-      <div className="max-w-6xl mx-auto my-12 p-10 bg-yellow-50 shadow-xl rounded-lg border border-orange-300 relative">
-        <div className="flex items-center mb-8">
+    <div className='min-h-screen p-5 bg-gradient-to-br from-[#fdf6e4] to-[#f9e0d9] dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-500'>
+      <div className="max-w-6xl mx-auto my-12 p-10 bg-yellow-50 dark:bg-opacity-20  shadow-xl rounded-lg border border-orange-300 relative">
+        <div className="relative flex items-center mb-8">
           <button
-            className="absolute left-3 bg-orange-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition"
+            className="absolute left-0 bg-orange-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-orange-600 transition"
             onClick={() => navigate(-1)}
           >
             Go Back
           </button>
-          <h1 className="w-full text-center font-extrabold text-4xl text-orange-700 tracking-wide">
+          <h1 className="w-full text-center font-extrabold text-4xl text-orange-700 dark:text-purple-300 tracking-wide">
             Service Booking
           </h1>
         </div>
 
-        <div className="mb-6 bg-orange-100 p-4 rounded-lg shadow-md border border-orange-300">
-          <h2 className="text-orange-800 font-semibold text-lg">
-            Mandir Name: <span className="font-bold">{formData.mandirName}</span>
+        <div className="mb-6 bg-orange-100 dark:bg-neutral-300 p-4 rounded-lg shadow-md border border-orange-300">
+          <h2 className="text-orange-800 font-bold text-lg">
+            Mandir Name: <span className="font-semibold">{formData.mandirName}</span>
           </h2>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label htmlFor="date" className="block text-orange-800 font-medium mb-2">
+              <label htmlFor="date" className="block text-orange-800 dark:text-purple-400 font-bold mb-2">
                 Date:
               </label>
               <input
@@ -144,12 +144,12 @@ export default function MandirServiceBookClient() {
                 value={formData.date}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               />
             </div>
 
             <div>
-              <label htmlFor="pandit" className="block text-orange-800 font-medium mb-2">
+              <label htmlFor="pandit" className="block text-orange-800 dark:text-purple-400 font-bold mb-2">
                 Pandits:
               </label>
               <select
@@ -158,7 +158,7 @@ export default function MandirServiceBookClient() {
                 value={formData.pandit}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               >
                 <option value="">Select a Pandit</option>
                 {pandits.map((pandit) => (
@@ -172,7 +172,7 @@ export default function MandirServiceBookClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label htmlFor="service" className="block text-orange-800 font-medium mb-2">
+              <label htmlFor="service" className="block text-orange-800 dark:text-purple-400 font-bold mb-2">
                 Services:
               </label>
               <select
@@ -181,7 +181,7 @@ export default function MandirServiceBookClient() {
                 value={formData.service}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all"
+                className="w-full px-4 py-2 border border-orange-300 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-orange-500 transition-all dark:bg-neutral-300 bg-orange-100"
               >
                 <option value="">Select a Service</option>
                 {services.map((service) => (
