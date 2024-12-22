@@ -28,7 +28,7 @@ The **Client Interface** is designed for devotees and offers the following optio
 ## How to Use
 
 - Clone the repository.  
-- Open **two terminals**:  
+- Open **two terminals** inside the `Admin` folder:  
   - In the first terminal, navigate to the `ActualFrontend` folder.  
   - In the second terminal, navigate to the `backend` folder.  
 - Run the following command in **both terminals**:  
