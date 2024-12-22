@@ -46,9 +46,9 @@ export default function Home() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="w-full max-w-6xl px-4 bg-white bg-opacity-50 py-8 sm:py-12 rounded-lg">
+      <div className="w-full max-w-6xl px-4 bg-neutral-200 dark:bg-slate-900 dark:bg-opacity-60 bg-opacity-50 py-8 sm:py-12 rounded-lg">
         <div className="text-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-8 sm:mb-12 tracking-wide">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-purple-300 mb-8 sm:mb-12 tracking-wide">
             Welcome to Pooja Pehal
           </h1>
 
@@ -88,19 +88,19 @@ export default function Home() {
           {/* Buttons Section */}
           <div className="mt-8 sm:mt-12 flex flex-wrap justify-center gap-4">
             <button
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
+              className=" bg-gradient-to-br from-yellow-200 to-orange-500 dark:bg-gradient-to-r dark:from-blue-500 dark:to-purple-600 text-slate-900 dark:text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
               onClick={handleSignOut}
             >
               <b>Sign Out</b>
             </button>
             <button
-              className="bg-orange-700 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
+              className=" bg-gradient-to-br from-yellow-200 to-orange-500 dark:bg-gradient-to-r dark:from-blue-500 dark:to-purple-600 text-slate-900 dark:text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
               onClick={handleViewBooking}
             >
               <b>View Bookings</b>
             </button>
             <button
-              className="bg-orange-700 text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-400"
+              className=" bg-gradient-to-br from-yellow-200 to-orange-500 dark:bg-gradient-to-r dark:from-blue-500 dark:to-purple-600 text-slate-900 dark:text-white py-3 px-8 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-purple-400"
               onClick={handleSelectLiveStream}
             >
               <b>LiveStreams</b>
