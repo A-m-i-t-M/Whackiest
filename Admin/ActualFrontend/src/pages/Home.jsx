@@ -192,6 +192,15 @@ export default function Home() {
     }
   };
 
+  const handleFAQ = async()=>{
+    try{
+      navigate("/admin-ques");
+    }catch(error){
+      console.log("Couldnt go to admin questions");
+      
+    }
+  }
+
   return (
     <div
       style={{
@@ -206,9 +215,13 @@ export default function Home() {
       }}
     >
       <div className=" bg-neutral-200 bg-opacity-80 mx-auto p-4 rounded-xl shadow-lg w-full max-w-4xl dark:bg-gray-900">
-        <h1 className="text-center font-bold uppercase text-2xl mb-5 dark:text-purple-300">
-          Current Temple
-        </h1>
+        <div className="flex flex-row items-center align-middle">
+          <h1 className="text-center font-bold uppercase text-2xl mb-5 dark:text-purple-300">
+            Current Temple
+          </h1>
+          <button className='border border-yellow-400 py-2 px-4 rounded-lg h-12 ml-56 mb-10 dark:bg-neutral-300' onClick={handleFAQ}>FAQs</button>
+        </div>
+        
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-5">
           <div className="border border-gray-900 rounded-xl dark:bg-slate-500 bg-slate-200 p-4">

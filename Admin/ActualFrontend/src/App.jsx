@@ -22,6 +22,8 @@ import QuestionAndAnswers from './pages/QuestionAndAnswers'
 import QnAform from './pages/QnAform'
 import Answers from './pages/Answers'
 import MandirForDonation from './pages/MandirForDonation'
+import AdminQues from './pages/AdminQues'
+import AdminAnswersQuestion from './pages/AdminAnswersQuestion'
 export default function App() {
   return <>
     <Header/>
@@ -48,6 +50,8 @@ export default function App() {
         <Route path='/discussions' element={<QuestionAndAnswers/>}/>
         <Route path='/qna' element={<QnAform/>}/>
         <Route path='/answers' element={<Answers/>}/>
+        <Route path='/admin-ques' element= {<AdminQues/>}/>
+        <Route path='/adminanswers' element = {<AdminAnswersQuestion/>}/>
       </Routes>
     </BrowserRouter>
   </>
