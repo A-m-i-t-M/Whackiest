@@ -27,15 +27,11 @@ function LandingPage() {
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white px-4">
-        {/* Title and Tagline in a white box */}
+        {/* Title and Tagline in Glassmorphism style */}
         <div
-          className="text-center mb-10 p-6 rounded-lg shadow-lg"
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)", // White background with 80% transparency
-            color: "#002", // Black text for contrast
-          }}
+          className="w-full max-w-3xl bg-gray-600 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border border-gray-100 text-center mb-10 p-6 shadow-lg"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
             🙏Welcome to Pooja Pehal🙏
           </h1>
           <p className="text-base sm:text-lg md:text-2xl font-medium">
