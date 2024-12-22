@@ -84,7 +84,7 @@ const DonationForm = () => {
           Pay
         </button>
       </form>
-      {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
+      {status && <p className="mt-4 text-center text-gray-700 dark:text-green-400">{status}</p>}
     </div>
    </div> 
   );
