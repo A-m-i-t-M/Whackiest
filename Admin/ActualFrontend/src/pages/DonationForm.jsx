@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-const stripePromise = loadStripe(); // Replace with your key
+const stripePromise = loadStripe(import.meta.env.VITE_API_KEY); // Replace with your key
 
 const DonationForm = () => {
   const stripe = useStripe();
