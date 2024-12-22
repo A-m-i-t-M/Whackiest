@@ -98,41 +98,49 @@ export default function ViewAdminStuff() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 to-orange-100 py-10 px-5">
-      <button
-        onClick={() => navigate(-1)} // Navigate back to the previous page
-        className="mb-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-      >
-        Go Back
-      </button>
+    <div className="min-h-screen bg-neutral-300 dark:bg-slate-800 py-10 px-5">
+      
+      <div className="flex flex-row items-center justify-between">
+          <button
+            onClick={() => navigate(-1)} // Navigate back to the previous page
+            className="mb-6 bg-red-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Go Back
+          </button>
+          <div className="flex-grow text-center">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-purple-300 mb-8 ml-0">
+              All Bookings
+            </h1>
 
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-        All Bookings
-      </h1>
+          </div>
+      </div>
+      
+      
       {error && (
         <div className="text-red-500 text-center mb-4">
           <p>Error: {error}</p>
         </div>
       )}
 
-      <h1 className="font-bold text-2xl ml-4 text-gray-800">Darshans</h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <h1 className="font-bold text-2xl ml-1 text-gray-800 dark:text-purple-300">Darshans</h1>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-2">
         {darshanbookings.map((booking, index) => (
           <div
             key={index}
-            className="bg-gradient-to-br from-yellow-200 to-orange-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
+            className="bg-gradient-to-br from-yellow-200 to-orange-300  dark:bg-gradient-to-br dark:from-slate-600 dark:to-slate-200 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
           >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              User Name: {booking.userName}
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-yellow-300 mb-2">
+               
+              <span className="font-semibold dark:text-purple-200">User Name: </span> {booking.userName}
             </h2>
-            <p className="text-gray-700">
-              <span className="font-medium">Date:</span> {booking.date}
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Date:</span> {booking.date}
             </p>
-            <p className="text-gray-700">
-              <span className="font-medium">Time:</span> {booking.time}
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Time:</span> {booking.time}
             </p>
-            <p className="text-gray-700">
-              <span className="font-medium">Item:</span> {booking.item}
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Item:</span> {booking.item}
             </p>
             <button
               className="mt-4 w-full sm:w-auto bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
@@ -144,24 +152,25 @@ export default function ViewAdminStuff() {
         ))}
       </div>
 
-      <h1 className="font-bold text-2xl ml-4 text-gray-800 mt-8">Services</h1>
+      <h1 className="font-bold text-2xl ml-4 text-gray-800 mt-8 dark:text-purple-300">Services</h1>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {servicebookings.map((booking, index) => (
           <div
             key={index}
             className="bg-gradient-to-br from-yellow-200 to-orange-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
           >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              User Name: {booking.userName}
-            </h2>
-            <p className="text-gray-700">
-              <span className="font-medium">Service:</span> {booking.service}
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-yellow-300 mb-2">
+               
+               <span className="font-semibold dark:text-purple-200">User Name: </span> {booking.userName}
+             </h2>
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Service:</span> {booking.service}
             </p>
-            <p className="text-gray-700">
-              <span className="font-medium">Pandit:</span> {booking.pandit}
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Pandit:</span> {booking.pandit}
             </p>
-            <p className="text-gray-700">
-              <span className="font-medium">Date:</span> {booking.date}
+            <p className="text-gray-700 dark:text-yellow-300">
+              <span className="font-semibold dark:text-purple-200">Date:</span> {booking.date}
             </p>
             <button
               className="mt-4 w-full sm:w-auto bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600"
