@@ -53,13 +53,13 @@ export default function SignUp() {
 
       {/* Right Side - Sign Up Form */}
       <div
-        className="flex-1 flex items-center justify-center px-4 py-8 md:px-8"
-        style={{
-          background: "linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 255, 0.7))",
-        }}
+        className="flex-1 flex items-center justify-center px-4 py-8 md:px-8 bg-neutral-400 dark:bg-slate-800 bg-opacity-50 "
+        // style={{
+        //   background: "linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 255, 0.7))",
+        // }}
       >
-        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-6 sm:p-8 max-w-sm w-full">
-          <h1 className="font-semibold my-4 sm:my-5 text-center text-2xl sm:text-3xl">
+        <div className="bg-neutral-200 dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-95 rounded-lg shadow-lg p-6 sm:p-8 max-w-sm w-full ">
+          <h1 className="font-semibold my-4 sm:my-5 text-center text-2xl sm:text-3xl dark:text-purple-300 text-slate-800">
             Sign Up
           </h1>
           <form className="flex flex-col gap-3 sm:gap-5" onSubmit={handleSubmit}>
@@ -87,15 +87,18 @@ export default function SignUp() {
             {error && <p className="text-red-700 text-center">{error}</p>}
             <button
               disabled={loading}
-              className="border rounded-xl bg-gray-500 disabled:opacity-50 text-white p-3 sm:p-4 hover:opacity-90"
+              // className="border rounded-xl bg-gray-500 disabled:opacity-50 text-white p-3 sm:p-4 hover:opacity-90"
+              className={`p-3 rounded-lg text-white bg-blue-500 hover:bg-blue-600 transition disabled:opacity-50 ${
+              loading && "cursor-not-allowed"
+            }`}
             >
               {loading ? "Loading..." : "SIGN UP"}
             </button>
           </form>
           <div className="flex flex-wrap gap-2 justify-center py-3">
-            <p>Have an Account?</p>
+            <p className='dark:text-purple-300'>Have an Account?</p>
             <Link to={"/bhakt/sign-in"}>
-              <span className="text-blue-700">Sign in</span>
+              <span className="text-blue-600 hover:underline dark:text-blue-300">Sign in</span>
             </Link>
           </div>
         </div>
