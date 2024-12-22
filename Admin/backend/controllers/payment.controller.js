@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import "dotenv/config"
-const stripe = new Stripe(process.env.SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const createPaymentIntent = async (req, res) => {
   try {
     const { amount } = req.body;
