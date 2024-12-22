@@ -157,7 +157,7 @@ export default function ViewAdminStuff() {
         {servicebookings.map((booking, index) => (
           <div
             key={index}
-            className="bg-gradient-to-br from-yellow-200 to-orange-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
+            className="bg-gradient-to-br from-yellow-200 to-orange-300  dark:bg-gradient-to-br dark:from-slate-600 dark:to-slate-200 shadow-lg rounded-lg p-6 hover:shadow-xl transition duration-300"
           >
             <h2 className="text-xl font-semibold text-gray-800 dark:text-yellow-300 mb-2">
                

@@ -50,8 +50,8 @@ export default function SignIn() {
                 backgroundImage: `url(${images})`,
             }}
         >
-            <div className="bg-white bg-opacity-80 p-6 rounded-xl shadow-md w-full max-w-md">
-                <h1 className="text-3xl font-semibold text-center mb-6">Sign In</h1>
+            <div className="bg-neutral-200 dark:bg-gray-900 bg-opacity-80 dark:bg-opacity-95 p-6 rounded-xl shadow-md w-full max-w-md">
+                <h1 className="text-3xl font-semibold text-center mb-6 dark:text-purple-300 text-slate-800">Sign In</h1>
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <input
                         placeholder="E-Mail"
@@ -78,7 +78,7 @@ export default function SignIn() {
                     </button>
                 </form>
                 <div className="flex justify-center gap-2 mt-4">
-                    <p>Don't have an Account?</p>
+                    <p className='dark:text-purple-300'>Don't have an Account?</p>
                     <Link to="/sign-up" className="text-blue-600 hover:underline">
                         Sign Up
                     </Link>
