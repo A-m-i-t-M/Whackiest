@@ -38,11 +38,12 @@ export default function Darshan() {
 
   return (
     <div
-      style={{
-        background: 'linear-gradient(to bottom right, #f9f7f1, #eae4dc)',
-        minHeight: '100vh',
-        padding: '20px',
-      }}
+      // style={{
+      //   background: 'linear-gradient(to bottom right, #f9f7f1, #eae4dc)',
+      //   minHeight: '100vh',
+      //   padding: '20px',
+      // }}
+      className=' bg-neutral-300 dark:bg-slate-800 min-h-screen py-10 px-5'
     >
       <div className="relative flex items-center mb-8">
         <button
@@ -51,7 +52,7 @@ export default function Darshan() {
         >
           Go Back
         </button>
-        <h1 className="w-full text-center font-extrabold text-4xl text-gray-800 tracking-wide">
+        <h1 className="w-full text-center font-extrabold text-4xl text-gray-800 dark:text-purple-300 tracking-wide">
           All Temples
         </h1>
       </div>
@@ -62,13 +63,13 @@ export default function Darshan() {
         {mandirs.map((mandir) => (
           <div
             key={mandir._id}
-            className="bg-[#FFFAE3] border border-gray-200 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 p-6 cursor-pointer"
+            className="bg-[#FFFAE3] border border-gray-200 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-3 p-6 cursor-pointer bg-gradient-to-br from-yellow-300 to-orange-300  dark:bg-gradient-to-br dark:from-slate-700 dark:to-slate-500"
             onClick={() => handleCardClick(mandir)}
           >
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-semibold text-gray-800">{mandir.username}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 dark:text-orange-300">{mandir.username}</h3>
             </div>
-            <p className="text-gray-600 text-base">{mandir.description}</p>
+            <p className="text-gray-600 text-base dark:text-neutral-200">{mandir.description}</p>
             <div className="mt-4">
               <button className="bg-orange-600 text-white py-2 px-4 rounded-lg text-sm hover:bg-orange-700 transition-colors duration-300">
                 Book Visit
